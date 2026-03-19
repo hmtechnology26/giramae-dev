@@ -1,0 +1,108 @@
+/* Estilos customizados de markdown para GiraMãe */
+
+.prose-giramae {
+  /* Cores GiraMãe para elementos markdown */
+  --tw-prose-headings: hsl(346.8 77.2% 49.8%); /* Rosa/Coral */
+  --tw-prose-links: hsl(346.8 77.2% 49.8%);
+  --tw-prose-bold: hsl(346.8 77.2% 49.8%);
+  --tw-prose-quotes: hsl(142.1 76.2% 36.3%); /* Verde */
+  --tw-prose-quote-borders: hsl(346.8 77.2% 49.8%);
+  --tw-prose-code: hsl(346.8 77.2% 49.8%);
+  --tw-prose-hr: hsl(20 5.9% 90%);
+}
+
+.dark .prose-giramae {
+  --tw-prose-headings: hsl(346.8 77.2% 49.8%);
+  --tw-prose-links: hsl(346.8 77.2% 49.8%);
+  --tw-prose-bold: hsl(346.8 77.2% 49.8%);
+  --tw-prose-quotes: hsl(142.1 76.2% 36.3%);
+  --tw-prose-quote-borders: hsl(346.8 77.2% 49.8%);
+  --tw-prose-code: hsl(346.8 77.2% 49.8%);
+}
+
+/* Imagens */
+.prose-giramae img {
+  border-radius: 0.8rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Citações */
+.prose-giramae blockquote {
+  border-left-width: 4px;
+  border-left-color: hsl(346.8 77.2% 49.8%);
+  background: hsl(346.8 77.2% 49.8% / 0.05);
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  font-style: italic;
+}
+
+/* Code blocks */
+.prose-giramae pre {
+  background: hsl(20 14.3% 4.1% / 0.05);
+  border: 1px solid hsl(20 5.9% 90%);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.dark .prose-giramae pre {
+  background: hsl(24 9.8% 10%);
+  border-color: hsl(24 9.8% 10%);
+}
+
+.prose-giramae code {
+  background: hsl(346.8 77.2% 49.8% / 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+/* Links */
+.prose-giramae a {
+  color: hsl(346.8 77.2% 49.8%);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.prose-giramae a:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+/* Listas */
+.prose-giramae ul,
+.prose-giramae ol {
+  margin: 1.5rem 0;
+}
+
+.prose-giramae li {
+  margin: 0.5rem 0;
+}
+
+/* Tabelas */
+.prose-giramae table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.prose-giramae th {
+  background: hsl(346.8 77.2% 49.8% / 0.1);
+  font-weight: 600;
+  padding: 0.75rem;
+  border: 1px solid hsl(20 5.9% 90%);
+}
+
+.prose-giramae td {
+  padding: 0.75rem;
+  border: 1px solid hsl(20 5.9% 90%);
+}
+
+/* Separadores */
+.prose-giramae hr {
+  border-color: hsl(20 5.9% 90%);
+  margin: 2rem 0;
+}

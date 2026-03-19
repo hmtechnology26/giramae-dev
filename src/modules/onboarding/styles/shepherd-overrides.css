@@ -1,0 +1,127 @@
+/* 
+ * CUSTOMIZAÇÃO DO SHEPHERD.JS
+ * Todos os seletores usam prefixo .gira-tour para não conflitar
+ */
+
+/* Overlay escuro com blur */
+.shepherd-modal-overlay-container {
+  background: rgba(0, 0, 0, 0.65) !important;
+  backdrop-filter: blur(3px);
+}
+
+/* Abertura do overlay (elemento destacado) */
+.shepherd-modal-overlay-container .shepherd-modal-is-visible {
+  opacity: 1;
+}
+
+/* Container do tooltip - sobrescreve Shepherd */
+.gira-tour-element {
+  background: transparent !important;
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  border: none !important;
+  max-width: 380px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  font-family: inherit;
+  z-index: 10000 !important;
+}
+
+/* Garantir tooltip sempre visível na viewport */
+.shepherd-element {
+  max-height: calc(100vh - 40px) !important;
+  max-width: calc(100vw - 32px) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOOLTIP CENTRALIZADO
+   Apenas quando explicitamente marcado como centralizado
+   ═══════════════════════════════════════════════════════════════════════════ */
+.shepherd-element.shepherd-centered,
+.gira-tour-element.gira-tour-centered {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+}
+
+/* Mobile: ajusta posicionamento mas mantém próximo ao elemento */
+@media (max-width: 640px) {
+  .gira-tour-element {
+    /* No mobile, permitimos que o Popper posicione, mas limitamos a largura */
+    width: calc(100vw - 32px) !important;
+    max-width: 380px !important;
+  }
+
+  /* Centralizado explicitamente no mobile */
+  .shepherd-element.shepherd-centered,
+  .gira-tour-element.gira-tour-centered {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: calc(100vw - 32px) !important;
+  }
+}
+
+/* Seta do tooltip - esconder quando centralizado */
+.shepherd-element.shepherd-centered .shepherd-arrow,
+.gira-tour-element.gira-tour-centered .shepherd-arrow {
+  display: none !important;
+}
+
+/* Seta do tooltip */
+.gira-tour-element .shepherd-arrow {
+  border-color: white !important;
+}
+
+.gira-tour-element .shepherd-arrow::before {
+  background: white !important;
+  border: 2px solid rgba(236, 72, 153, 0.3);
+}
+
+@media (max-width: 640px) {
+  .gira-tour-element .shepherd-arrow {
+    display: none !important;
+  }
+}
+
+/* Elemento destacado - classe adicionada pelo Shepherd */
+.gira-highlight {
+  position: relative !important;
+  z-index: 9999 !important;
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.5) !important;
+  pointer-events: auto !important;
+}
+
+/* Variante com animação de pulso */
+.gira-highlight-pulse {
+  animation: gira-pulse 2s infinite ease-in-out;
+}
+
+@keyframes gira-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(236, 72, 153, 0.25);
+  }
+}
+
+/* Header do Shepherd escondido pois usamos o nosso customizado */
+.shepherd-header {
+  display: none !important;
+}
+
+.shepherd-content {
+  padding: 0 !important;
+}
+
+.shepherd-text {
+  padding: 0 !important;
+}

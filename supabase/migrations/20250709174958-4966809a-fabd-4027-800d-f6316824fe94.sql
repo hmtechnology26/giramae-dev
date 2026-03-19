@@ -1,0 +1,5 @@
+-- Adicionar campos para controle de termos de uso
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS termos_aceitos BOOLEAN DEFAULT FALSE;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS termos_aceitos_em TIMESTAMP WITH TIME ZONE;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS politica_aceita BOOLEAN DEFAULT FALSE;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS politica_aceita_em TIMESTAMP WITH TIME ZONE;

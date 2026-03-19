@@ -1,0 +1,14 @@
+.gira-tooltip-container {
+  position: relative;
+  background: white;
+  overflow: hidden;
+}
+
+.gira-bubble-tail {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: white;
+  transform: rotate(45deg);
+  z-index: -1;
+}

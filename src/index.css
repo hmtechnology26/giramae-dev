@@ -1,0 +1,152 @@
+@import 'shepherd.js/dist/css/shepherd.css';
+@import './modules/onboarding/styles/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* GiraMãe Premium Light Theme - Founders Layout */
+    --background: 330 30% 99%;
+    /* Extremely light pink */
+    --foreground: 340 25% 15%;
+    /* Dark charcoal with pink undertone */
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 25% 15%;
+
+    --primary: 346.8 84.1% 60.1%;
+    /* GiraMãe Vibrant Pink */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 142.1 76.2% 36.3%;
+    /* Support Green */
+    --secondary-foreground: 355.7 100% 97.3%;
+
+    --muted: 330 15% 94%;
+    --muted-foreground: 340 10% 45%;
+
+    --accent: 330 100% 97%;
+    /* Soft highlight pink */
+    --accent-foreground: 346.8 84.1% 60.1%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 330 20% 92%;
+    --input: 330 20% 92%;
+    --ring: 346.8 84.1% 60.1%;
+
+    --radius: 1.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', 'Poppins', sans-serif;
+    background-image:
+      radial-gradient(circle at 50% -20%, hsl(var(--primary) / 0.1), transparent 70%),
+      radial-gradient(circle at 100% 100%, hsl(var(--primary) / 0.05), transparent 50%),
+      radial-gradient(circle at 0% 50%, hsl(var(--primary) / 0.03), transparent 40%);
+    background-attachment: fixed;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap');
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/40 backdrop-blur-md border border-white/20;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.03);
+  }
+
+  .glass-header {
+    @apply bg-white/40 backdrop-blur-2xl border border-white/40;
+    box-shadow: 0 15px 50px -12px rgba(0, 0, 0, 0.3), 0 4px 15px -5px rgba(0, 0, 0, 0.05);
+  }
+
+  .glass-dark {
+    @apply bg-background/80 backdrop-blur-xl border border-primary/5 shadow-lg;
+  }
+
+  .premium-card {
+    @apply bg-white/50 backdrop-blur-lg border border-primary/5 hover:border-primary/20 hover:bg-white/80 transition-all duration-500;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  }
+
+  .premium-card:hover {
+    box-shadow: 0 25px 50px hsla(346, 84%, 60%, 0.1);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 15px hsl(var(--primary) / 0.2);
+  }
+
+  .bg-glow {
+    @apply relative;
+  }
+
+  .bg-glow::before {
+    content: '';
+    @apply absolute -z-10 blur-[100px] rounded-full;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.2), transparent 70%);
+  }
+
+  .founders-button {
+    @apply relative overflow-hidden transition-all duration-700 active:scale-95 flex items-center justify-center;
+    background: linear-gradient(45deg, hsl(var(--primary)), #ff85b2, hsl(var(--primary)));
+    background-size: 200% auto;
+    box-shadow: 0 10px 20px -5px hsla(346, 84%, 60%, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .founders-button:hover {
+    background-position: right center;
+    box-shadow: 0 25px 45px -10px hsla(346, 84%, 60%, 0.5);
+  }
+
+  .founders-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full transition-transform duration-1000 ease-in-out;
+  }
+
+  .founders-button:hover::before {
+    @apply translate-x-full;
+  }
+
+  .founders-button::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300 bg-white/10;
+  }
+
+  .founders-button:hover::after {
+    @apply opacity-100;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}

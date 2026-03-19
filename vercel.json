@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://sjyvqtfpvqavtffexoky.supabase.co/functions/v1/sitemap-index"
+    },
+    {
+      "source": "/sitemap-index.xml",
+      "destination": "https://sjyvqtfpvqavtffexoky.supabase.co/functions/v1/sitemap-index"
+    },
+    {
+      "source": "/sitemap-posts.xml",
+      "destination": "https://sjyvqtfpvqavtffexoky.supabase.co/functions/v1/sitemap-posts"
+    },
+    {
+      "source": "/sitemap-categories.xml",
+      "destination": "https://sjyvqtfpvqavtffexoky.supabase.co/functions/v1/sitemap-categories"
+    },
+    {
+      "source": "/sitemap-tags.xml",
+      "destination": "https://sjyvqtfpvqavtffexoky.supabase.co/functions/v1/sitemap-tags"
+    },
+    {
+      "source": "/sitemap-static.xml",
+      "destination": "https://sjyvqtfpvqavtffexoky.supabase.co/functions/v1/sitemap-static"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

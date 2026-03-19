@@ -1,0 +1,28 @@
+User-agent: Googlebot 
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: *
+Allow: /
+Allow: /termos
+Allow: /privacidade
+Disallow: /feed
+Disallow: /buscar
+Disallow: /perfil
+Disallow: /carteira
+Disallow: /reservas
+Disallow: /admin
+Disallow: /configuracoes
+Disallow: /publicar
+Disallow: /onboarding
+Disallow: /auth
+
+Sitemap: https://giramae.com.br/sitemap.xml
