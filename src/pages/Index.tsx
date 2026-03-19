@@ -165,7 +165,7 @@ const LandingPageOptimized = () => {
             <div className="relative rounded-[3rem] overflow-hidden bg-white/40 backdrop-blur-xl border border-white/60 p-4 shadow-2xl">
               <div className="rounded-[2.5rem] overflow-hidden bg-muted aspect-[21/9] relative">
                 <img
-                  src="/public/maes_troca_parquinho.png"
+                  src="/maes_troca_parquinho.png"
                   alt="Comunidade GiraMãe"
                   className="w-full h-full object-cover opacity-90 transition-transform duration-1000 hover:scale-105"
                 />

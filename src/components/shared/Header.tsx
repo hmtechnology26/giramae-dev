@@ -132,7 +132,7 @@ const Header = () => {
   if (!user) {
     return (
       <header className="w-full fixed top-2 left-3 right-3 md:left-6 md:right-6 z-50 rounded-full mx-auto max-w-6xl transition-all duration-500">
-        <div className="bg-white/60 backdrop-blur-3xl border border-white/80 rounGiraMãe Código Mainded-full px-4 md:px-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]">
+        <div className="bg-white/60 backdrop-blur-3xl border border-white/80 rounded-full px-4 md:px-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]">
           <div className="flex justify-between items-center h-18 md:h-20">
             <Link to="/" className="flex items-center group transition-all duration-500">
               <img src="/giramae_logo.png" alt="Logo" className="h-[36px] md:h-[56px] w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
