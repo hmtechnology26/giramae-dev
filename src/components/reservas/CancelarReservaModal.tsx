@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertTriangle, XCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { buildItemImageUrl, isFullUrl } from '@/lib/cdn';
 
 interface MotivoCancel {
   id: number;
@@ -187,11 +188,22 @@ export const CancelarReservaModal = ({
           {/* Informações do item */}
           <div className="bg-gray-50 rounded-lg p-3">
             <div className="flex items-center gap-3">
-              <img
-                src={reserva.itens?.fotos?.[0] || "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=100"}
-                alt={reserva.itens?.titulo || "Item"}
-                className="w-12 h-12 rounded-lg object-cover"
-              />
+              {(() => {
+                const foto = reserva.itens?.fotos?.[0];
+                const fotoUrl = foto 
+                  ? (isFullUrl(foto) ? foto : buildItemImageUrl(foto))
+                  : '/placeholder.svg';
+                return (
+                  <img
+                    src={fotoUrl}
+                    alt={reserva.itens?.titulo || "Item"}
+                    className="w-12 h-12 rounded-lg object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = '/placeholder.svg';
+                    }}
+                  />
+                );
+              })()}
               <div className="flex-1">
                 <h4 className="font-medium text-sm line-clamp-1">
                   {reserva.itens?.titulo || "Item"}

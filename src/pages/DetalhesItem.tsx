@@ -76,7 +76,7 @@ const DetalhesItem = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { criarReserva, cancelarReserva, isItemReservado } = useReservas();
+  const { criarReserva, cancelarReserva, isItemReservado, reservas } = useReservas();
   const { processarBonusTrocaConcluida } = useBonificacoes();
   const { verificarSaldo, saldo } = useCarteira();
   const queryClient = useQueryClient();
@@ -180,13 +180,24 @@ const DetalhesItem = () => {
   };
 
   const handleCancelarReserva = async () => {
-    if (!id) return;
+    if (!id || !user) return;
+
+    const reserva = reservas.find(r => r.item_id === id && r.usuario_reservou === user.id && r.status === 'pendente');
+    
+    if (!reserva) {
+      toast({
+        title: "Erro",
+        description: "Reserva não encontrada.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     try {
-      await cancelarReserva(id);
+      await cancelarReserva(reserva.id);
       toast({
         title: "Reserva cancelada",
-        description: "A reserva deste item foi cancelada.",
+        description: "A reserva foi cancelada e o valor foi reembolsado para sua carteira.",
       });
       refetch();
       queryClient.invalidateQueries({ queryKey: ['carteira'] });
@@ -258,8 +269,10 @@ const DetalhesItem = () => {
   const isItemAvailable = item.status === 'disponivel';
   const isItemReserved = item.status === 'reservado';
   
-  const usuarioJaReservou = isItemReservado(id);
+  const usuarioJaReservou = isItemReservado(id || '');
   const hasActiveReservation = usuarioJaReservou;
+
+  const isUserWhoReserved = isItemReserved && usuarioJaReservou;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-25 to-blue-50 font-sans">
@@ -393,7 +406,7 @@ const DetalhesItem = () => {
                   </Button>
                 )}
 
-                {!isOwner && isItemReserved && (
+                {!isOwner && isItemReserved && isUserWhoReserved && (
                   <div className="flex flex-col gap-4">
                     <Button
                       onClick={handleTrocarMensagens}
