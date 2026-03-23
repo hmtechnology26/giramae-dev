@@ -137,7 +137,7 @@ export const useCarteira = () => {
     enabled: !!user,
     staleTime: 0,
     gcTime: 0,
-    refetchOnWindowFocus: true, 
+    refetchOnWindowFocus: false, 
     refetchOnMount: true, 
     refetchInterval: false, 
     retry: 1,

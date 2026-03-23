@@ -55,7 +55,7 @@ export const useCidadeLiberada = (): CidadeLiberadaData => {
     enabled: !!user?.id,
     staleTime: 0, // Dados críticos sempre atuais
     gcTime: 5 * 60 * 1000, // 5 minutos
-    refetchOnWindowFocus: true
+    refetchOnWindowFocus: false
   });
 
   // Função para invalidar cache quando cidade for liberada

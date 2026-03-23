@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { analytics } from '@/lib/analytics';
@@ -34,6 +34,7 @@ import { supabase } from '@/integrations/supabase/client';
 import FriendlyError from '@/components/error/FriendlyError';
 import { useReservas } from '@/hooks/useReservas';
 import { useBonificacoes } from '@/hooks/useBonificacoes';
+import { useCarteira } from '@/hooks/useCarteira';
 import { buildAvatarUrl, buildItemImageUrl } from '@/lib/cdn';
 import { ChevronLeft, ShieldCheck, MapPin, AlertCircle, MessageCircle, Heart, Star, ShoppingBag, Clock, Tag } from 'lucide-react';
 import Header from '@/components/shared/Header';
@@ -75,8 +76,10 @@ const DetalhesItem = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { criarReserva, cancelarReserva } = useReservas();
+  const { criarReserva, cancelarReserva, isItemReservado } = useReservas();
   const { processarBonusTrocaConcluida } = useBonificacoes();
+  const { verificarSaldo, saldo } = useCarteira();
+  const queryClient = useQueryClient();
   const [denunciaDialogOpen, setDenunciaDialogOpen] = useState(false);
   const [motivoDenuncia, setMotivoDenuncia] = useState('');
   const [selectedPhoto, setSelectedPhoto] = useState(0);
@@ -147,6 +150,15 @@ const DetalhesItem = () => {
   const handleReservarItem = async () => {
     if (!id || !item) return;
 
+    if (!verificarSaldo(item.valor_girinhas)) {
+      toast({
+        title: "Saldo insuficiente",
+        description: `Você precisa de pelo menos ${item.valor_girinhas} G$ para reservar este item. Seu saldo atual: ${saldo} G$`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     analytics.items.reserve(item.id, item.valor_girinhas);
 
     try {
@@ -157,6 +169,7 @@ const DetalhesItem = () => {
         description: "O vendedor foi notificado da sua reserva.",
       });
       refetch();
+      queryClient.invalidateQueries({ queryKey: ['carteira'] });
     } catch (error: any) {
       toast({
         title: "Erro ao reservar item",
@@ -176,6 +189,7 @@ const DetalhesItem = () => {
         description: "A reserva deste item foi cancelada.",
       });
       refetch();
+      queryClient.invalidateQueries({ queryKey: ['carteira'] });
     } catch (error: any) {
       toast({
         title: "Erro ao cancelar reserva",
@@ -215,7 +229,7 @@ const DetalhesItem = () => {
     }
 
     const numeroWhatsApp = item.publicado_por_profile.whatsapp.replace(/\D/g, '');
-    const mensagemPadrao = `Olá! Tenho interesse no item "${item.titulo}" que você está doando no GiraMãe.`;
+    const mensagemPadrao = `Olá! Eu reservei o item "${item.titulo}" no GiraMãe. Gostaria de combinar a entrega. Qual o melhor horário e local?`;
     const linkWhatsApp = `https://wa.me/55${numeroWhatsApp}?text=${encodeURIComponent(mensagemPadrao)}`;
     window.open(linkWhatsApp, '_blank');
   };
@@ -243,6 +257,9 @@ const DetalhesItem = () => {
   const isOwner = user?.id === item.publicado_por;
   const isItemAvailable = item.status === 'disponivel';
   const isItemReserved = item.status === 'reservado';
+  
+  const usuarioJaReservou = isItemReservado(id);
+  const hasActiveReservation = usuarioJaReservou;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-25 to-blue-50 font-sans">
@@ -368,32 +385,31 @@ const DetalhesItem = () => {
 
               <div className="space-y-4 pt-4">
                 {!isOwner && isItemAvailable && (
-                  <div className="flex flex-col gap-4">
-                    <Button
-                      onClick={handleReservarItem}
-                      className="founders-button w-full h-16 text-white text-lg rounded-full shadow-2xl shadow-primary/30"
-                    >
-                      Reservar com Girinhas
-                    </Button>
-                    <Button
-                      onClick={handleTrocarMensagens}
-                      variant="outline"
-                      className="w-full h-16 text-foreground/60 font-black text-lg rounded-full border-primary/10 hover:bg-primary/5 flex gap-3"
-                    >
-                      <MessageCircle className="w-6 h-6" />
-                      Falar com a Mãe
-                    </Button>
-                  </div>
+                  <Button
+                    onClick={handleReservarItem}
+                    className="founders-button w-full h-16 text-white text-lg rounded-full shadow-2xl shadow-primary/30"
+                  >
+                    Reservar Item
+                  </Button>
                 )}
 
                 {!isOwner && isItemReserved && (
-                  <Button
-                    variant="destructive"
-                    onClick={handleCancelarReserva}
-                    className="w-full h-16 text-lg font-black rounded-full shadow-2xl shadow-red-500/20"
-                  >
-                    Cancelar Minha Reserva
-                  </Button>
+                  <div className="flex flex-col gap-4">
+                    <Button
+                      onClick={handleTrocarMensagens}
+                      className="founders-button w-full h-16 text-white text-lg rounded-full shadow-2xl shadow-green-500/30 bg-green-500 hover:bg-green-600 flex gap-3"
+                    >
+                      <MessageCircle className="w-6 h-6" />
+                      Combinar a Entrega
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={handleCancelarReserva}
+                      className="w-full h-12 text-sm font-bold rounded-full border-red-200 text-red-500 hover:bg-red-50"
+                    >
+                      Cancelar Minha Reserva
+                    </Button>
+                  </div>
                 )}
 
                 {isOwner && isItemAvailable && (

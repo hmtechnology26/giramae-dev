@@ -89,7 +89,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
     onError?.();
   };
 
-  // Se deu erro, mostrar fallback
+  // Se deu erro, mostrar placeholder
   if (hasError) {
     return (
       <div 
@@ -99,10 +99,11 @@ const LazyImage: React.FC<LazyImageProps> = ({
           className
         )}
       >
-        <div className="text-center">
-          <span className="text-4xl mb-2 block">⚠️</span>
-          <span className="text-sm">Erro na imagem</span>
-        </div>
+        <img 
+          src="/placeholder.svg"
+          alt={alt}
+          className="w-full h-full object-cover"
+        />
       </div>
     );
   }

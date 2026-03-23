@@ -95,7 +95,7 @@ export const useGirinhasExpiracao = () => {
     // Cache muito menos agressivo para permitir atualizações
     staleTime: 0, // Sem cache stale
     gcTime: 1000 * 60 * 2, // 2 minutos apenas
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
     refetchOnMount: true,
     retry: 1
   });

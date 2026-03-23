@@ -101,7 +101,7 @@ export const useGirinhasExpiracaoSegura = () => {
     enabled: !!user,
     staleTime: 0, // Sem cache stale para dados sempre atualizados
     gcTime: 1000 * 60 * 2, // 2 minutos apenas
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
     refetchOnMount: true,
     retry: 1
   });

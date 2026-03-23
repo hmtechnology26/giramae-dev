@@ -406,7 +406,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
             ) : (
               <div className="w-full h-full overflow-hidden">
                 <LazyImage
-                  src={item.fotos?.[0] ? buildItemImageUrl(item.fotos[0]) : '/placeholder-item.jpg'}
+                  src={item.fotos?.[0] ? buildItemImageUrl(item.fotos[0]) : '/placeholder.svg'}
                   alt={item.titulo}
                   className={cn(
                     "w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110",
@@ -762,7 +762,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
               style={{ transform: `scale(${imageZoom})` }}
             >
               <img
-                src={item.fotos?.[selectedImageIndex] ? buildItemImageUrl(item.fotos[selectedImageIndex]) : '/placeholder-item.jpg'}
+                src={item.fotos?.[selectedImageIndex] ? buildItemImageUrl(item.fotos[selectedImageIndex]) : '/placeholder.svg'}
                 alt={item.titulo}
                 className="max-w-full max-h-[80vh] object-contain shadow-2xl"
               />

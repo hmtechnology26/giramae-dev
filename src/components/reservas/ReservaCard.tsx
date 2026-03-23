@@ -1,11 +1,25 @@
 // src/components/reservas/ReservaCard.tsx - VERSÃO CORRIGIDA
 
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Clock, CheckCircle, X, Users, Star, Key, Eye, MessageCircle } from "lucide-react";
+import {
+  Clock,
+  CheckCircle,
+  X,
+  Users,
+  Star,
+  Key,
+  Eye,
+  MessageCircle,
+} from "lucide-react";
 import AvaliacaoModal from "./AvaliacaoModal";
 import CodigoConfirmacaoModal from "./CodigoConfirmacaoModal";
 import { CancelarReservaModal } from "./CancelarReservaModal";
@@ -55,7 +69,7 @@ const ReservaCard = ({
   onConfirmarEntrega,
   onCancelarReserva,
   onRefresh,
-  onVerDetalhes
+  onVerDetalhes,
 }: ReservaCardProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -71,18 +85,18 @@ const ReservaCard = ({
   // Verificar se já avaliou quando componente carrega
   useEffect(() => {
     const verificarAvaliacao = async () => {
-      if (reserva.status === 'confirmada' && user?.id) {
+      if (reserva.status === "confirmada" && user?.id) {
         try {
           const { data } = await supabase
-            .from('avaliacoes')
-            .select('id')
-            .eq('reserva_id', reserva.id)
-            .eq('avaliador_id', user.id)
+            .from("avaliacoes")
+            .select("id")
+            .eq("reserva_id", reserva.id)
+            .eq("avaliador_id", user.id)
             .maybeSingle();
 
           setJaAvaliou(!!data);
         } catch (error) {
-          console.error('Erro ao verificar avaliação:', error);
+          console.error("Erro ao verificar avaliação:", error);
         }
       }
     };
@@ -90,7 +104,9 @@ const ReservaCard = ({
     verificarAvaliacao();
   }, [reserva.id, reserva.status, user?.id]);
   const isVendedor = reserva.usuario_item === user?.id;
-  const outraPessoa = isReservador ? reserva.profiles_vendedor : reserva.profiles_reservador;
+  const outraPessoa = isReservador
+    ? reserva.profiles_vendedor
+    : reserva.profiles_reservador;
   const imagemItem = reserva.itens?.fotos?.[0]
     ? buildItemImageUrl(reserva.itens.fotos[0])
     : "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=200";
@@ -108,13 +124,14 @@ const ReservaCard = ({
 
     // ✅ LIMPAR E VALIDAR NÚMERO DE TELEFONE
     const rawNumber = outraPessoa.whatsapp;
-    const cleanNumber = rawNumber.replace(/\D/g, ''); // Remove tudo que não é dígito
+    const cleanNumber = rawNumber.replace(/\D/g, ""); // Remove tudo que não é dígito
 
     // ✅ VALIDAR SE O NÚMERO É VÁLIDO (pelo menos 10 dígitos)
     if (cleanNumber.length < 10) {
       toast({
         title: "Número inválido",
-        description: "O número de WhatsApp desta pessoa parece estar incompleto.",
+        description:
+          "O número de WhatsApp desta pessoa parece estar incompleto.",
         variant: "destructive",
       });
       return;
@@ -122,56 +139,57 @@ const ReservaCard = ({
 
     // ✅ GARANTIR FORMATO BRASILEIRO (adicionar 55 se necessário)
     let finalNumber = cleanNumber;
-    if (!finalNumber.startsWith('55')) {
-      finalNumber = '55' + finalNumber;
+    if (!finalNumber.startsWith("55")) {
+      finalNumber = "55" + finalNumber;
     }
 
     const nomeOutraPessoa = outraPessoa.nome;
     const tituloItem = reserva.itens?.titulo || "item";
-    const codigoItem = reserva.itens?.codigo_unico || '';
+    const codigoItem = reserva.itens?.codigo_unico || "";
 
     // ✅ MENSAGEM PERSONALIZADA BASEADA NO PAPEL DO USUÁRIO (incluindo código do item)
     let mensagem = "";
 
     if (isReservador) {
       // Você reservou - vai falar com o vendedor (incluindo código do item)
-      mensagem = `Olá ${nomeOutraPessoa}! Sobre o item *${tituloItem}* ${codigoItem ? `(Código: *${codigoItem}*)` : ''} que reservei. Quando podemos combinar a entrega? 😊`;
+      mensagem = `Olá ${nomeOutraPessoa}! Sobre o item *${tituloItem}* ${codigoItem ? `(Código: *${codigoItem}*)` : ""} que reservei. Quando podemos combinar a entrega? 😊`;
     } else {
       // Reservaram seu item - vai falar com o comprador (incluindo código do item)
-      mensagem = `Olá ${nomeOutraPessoa}! Sobre o item *${tituloItem}* ${codigoItem ? `(Código: *${codigoItem}*)` : ''} que você reservou. Quando podemos combinar a entrega? 😊`;
+      mensagem = `Olá ${nomeOutraPessoa}! Sobre o item *${tituloItem}* ${codigoItem ? `(Código: *${codigoItem}*)` : ""} que você reservou. Quando podemos combinar a entrega? 😊`;
     }
 
     // ✅ CONSTRUIR URL DO WHATSAPP (SEM 55 DUPLICADO)
     const whatsappUrl = `https://wa.me/${finalNumber}?text=${encodeURIComponent(mensagem)}`;
 
-    console.log('🟡 Abrindo WhatsApp:', {
+    console.log("🟡 Abrindo WhatsApp:", {
       numeroOriginal: rawNumber,
       numeroLimpo: cleanNumber,
       numeroFinal: finalNumber,
-      url: whatsappUrl
+      url: whatsappUrl,
     });
 
     try {
       // ✅ REGISTRAR CONVERSA NO LOG (IGUAL AO FEED)
-      await supabase.rpc('registrar_conversa_whatsapp', {
+      await supabase.rpc("registrar_conversa_whatsapp", {
         p_reserva_id: reserva.id,
-        p_usuario_recebeu: isReservador ? reserva.usuario_item : reserva.usuario_reservou
+        p_usuario_recebeu: isReservador
+          ? reserva.usuario_item
+          : reserva.usuario_reservou,
       });
-      console.log('✅ Comunicação WhatsApp registrada no banco');
+      console.log("✅ Comunicação WhatsApp registrada no banco");
 
       // ✅ MOSTRAR TOAST DE CONFIRMAÇÃO
       toast({
         title: "Abrindo WhatsApp...",
         description: `Iniciando conversa com ${nomeOutraPessoa}`,
       });
-
     } catch (error) {
-      console.error('❌ Erro ao registrar comunicação WhatsApp:', error);
+      console.error("❌ Erro ao registrar comunicação WhatsApp:", error);
       // Não bloquear a abertura do WhatsApp por erro no log
     }
 
     // ✅ ABRIR WHATSAPP
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, "_blank");
   };
 
   // ✅ FUNÇÃO PARA ABRIR DETALHES
@@ -182,29 +200,31 @@ const ReservaCard = ({
   };
 
   // Função com retry para verificação de avaliação
-  const verificarSeJaAvaliouComRetry = async (maxTentativas = 3): Promise<boolean> => {
+  const verificarSeJaAvaliouComRetry = async (
+    maxTentativas = 3,
+  ): Promise<boolean> => {
     for (let i = 0; i < maxTentativas; i++) {
       try {
         const { data } = await supabase
-          .from('avaliacoes')
-          .select('id')
-          .eq('reserva_id', reserva.id)
-          .eq('avaliador_id', user?.id)
+          .from("avaliacoes")
+          .select("id")
+          .eq("reserva_id", reserva.id)
+          .eq("avaliador_id", user?.id)
           .single();
 
         return !!data;
       } catch (error) {
         if (i === maxTentativas - 1) {
-          console.error('Erro ao verificar avaliação após retry:', error);
+          console.error("Erro ao verificar avaliação após retry:", error);
         }
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 100));
       }
     }
     return false;
   };
 
   const formatarTempo = (tempo?: number) => {
-    if (!tempo) return 'Expirado';
+    if (!tempo) return "Expirado";
     const horas = Math.floor(tempo / (1000 * 60 * 60));
     const minutos = Math.floor((tempo % (1000 * 60 * 60)) / (1000 * 60));
     return `${horas}h ${minutos}m`;
@@ -212,11 +232,19 @@ const ReservaCard = ({
 
   const getStatusBadge = () => {
     switch (reserva.status) {
-      case 'pendente':
-        return <Badge className="bg-orange-100 text-orange-700 border-orange-200">Ativa</Badge>;
-      case 'confirmada':
-        return <Badge className="bg-green-100 text-green-700 border-green-200">Confirmada</Badge>;
-      case 'cancelada':
+      case "pendente":
+        return (
+          <Badge className="bg-orange-100 text-orange-700 border-orange-200">
+            Ativa
+          </Badge>
+        );
+      case "confirmada":
+        return (
+          <Badge className="bg-green-100 text-green-700 border-green-200">
+            Confirmada
+          </Badge>
+        );
+      case "cancelada":
         return <Badge variant="secondary">Cancelada</Badge>;
       default:
         return <Badge variant="outline">{reserva.status}</Badge>;
@@ -236,10 +264,12 @@ const ReservaCard = ({
   };
 
   const getTempoRestante = () => {
-    if (reserva.status === 'pendente' && reserva.tempo_restante) {
+    if (reserva.status === "pendente" && reserva.tempo_restante) {
       const isUrgent = reserva.tempo_restante < 2 * 60 * 60 * 1000; // menos de 2 horas
       return (
-        <div className={`flex items-center gap-1 ${isUrgent ? 'text-red-600' : 'text-orange-600'}`}>
+        <div
+          className={`flex items-center gap-1 ${isUrgent ? "text-red-600" : "text-orange-600"}`}
+        >
           <Clock className="w-4 h-4" />
           <span>Expira em {formatarTempo(reserva.tempo_restante)}</span>
         </div>
@@ -248,10 +278,11 @@ const ReservaCard = ({
     return null;
   };
 
-  const mostrarBotaoAvaliar = reserva.status === 'confirmada' && !jaAvaliou;
+  const mostrarBotaoAvaliar = reserva.status === "confirmada" && !jaAvaliou;
 
   // ✅ VERIFICAR SE DEVE MOSTRAR WHATSAPP
-  const mostrarWhatsApp = reserva.status === 'pendente' && outraPessoa?.whatsapp;
+  const mostrarWhatsApp =
+    reserva.status === "pendente" && outraPessoa?.whatsapp;
 
   return (
     <>
@@ -281,7 +312,10 @@ const ReservaCard = ({
                   </h3>
                   {/* ✅ BADGE AZUL COM CÓDIGO DO ITEM */}
                   {reserva.itens?.codigo_unico && (
-                    <Badge variant="outline" className="text-xs font-mono bg-blue-50 text-blue-700 border-blue-200 shrink-0">
+                    <Badge
+                      variant="outline"
+                      className="text-xs font-mono bg-blue-50 text-blue-700 border-blue-200 shrink-0"
+                    >
                       {reserva.itens.codigo_unico}
                     </Badge>
                   )}
@@ -302,15 +336,19 @@ const ReservaCard = ({
             <Avatar className="w-8 h-8">
               <AvatarImage src={buildAvatarUrl(outraPessoa?.avatar_url)} />
               <AvatarFallback className="text-xs">
-                {outraPessoa?.nome?.split(' ').map(n => n[0]).join('') || '?'}
+                {outraPessoa?.nome
+                  ?.split(" ")
+                  .map((n) => n[0])
+                  .join("") || "?"}
               </AvatarFallback>
             </Avatar>
             <div>
               <p className="text-sm font-medium">
-                {isReservador ? 'Vendedor' : 'Comprador'}: {outraPessoa?.nome || 'Usuário'}
+                {isReservador ? "Vendedor" : "Comprador"}:{" "}
+                {outraPessoa?.nome || "Usuário"}
               </p>
               <p className="text-xs text-gray-500">
-                {isReservador ? 'Você reservou este item' : 'Reservou seu item'}
+                {isReservador ? "Você reservou este item" : "Reservou seu item"}
               </p>
             </div>
           </div>
@@ -322,47 +360,47 @@ const ReservaCard = ({
         </CardContent>
 
         <CardFooter className="pt-3 bg-gray-50/50">
-          <div className="flex gap-2 w-full">
-            {/* ✅ BOTÃO VER DETALHES SEMPRE PRESENTE */}
+          <div className="flex items-center gap-2 w-full min-w-0">
             {onVerDetalhes && (
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleVerDetalhes}
-                className="shrink-0"
+                className="shrink-0 px-2"
               >
                 <Eye className="w-4 h-4" />
               </Button>
             )}
 
-            {reserva.status === 'pendente' && (
+            {reserva.status === "pendente" && (
               <>
-                {/* ✅ BOTÃO WHATSAPP CORRIGIDO */}
                 {mostrarWhatsApp && (
                   <Button
                     size="sm"
                     onClick={handleWhatsAppClick}
-                    className="flex-1 bg-green-500 hover:bg-green-600 text-white"
+                    className="flex-1 min-w-0 bg-green-500 hover:bg-green-600 text-white"
                   >
-                    <MessageCircle className="w-4 h-4 mr-1" />
-                    WhatsApp
+                    <MessageCircle className="w-4 h-4 mr-1 shrink-0" />
+                    <span className="truncate">WhatsApp</span>
                   </Button>
                 )}
 
                 <Button
                   size="sm"
                   onClick={() => setShowCodigoModal(true)}
-                  className={`${mostrarWhatsApp ? 'shrink-0' : 'flex-1'} bg-blue-600 hover:bg-blue-700`}
+                  className="shrink-0 px-3 bg-blue-600 hover:bg-blue-700"
                 >
                   <Key className="w-4 h-4 mr-1" />
-                  {isVendedor ? 'Ver código' : 'Código'}
+                  <span className="hidden lg:inline">
+                    {isVendedor ? "Ver código" : "Código"}
+                  </span>
                 </Button>
 
                 <Button
                   size="sm"
                   variant="outline"
                   onClick={() => setShowCancelarModal(true)}
-                  className="shrink-0 border-red-200 text-red-600 hover:bg-red-50"
+                  className="shrink-0 px-2 border-red-200 text-red-600 hover:bg-red-50"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -373,10 +411,10 @@ const ReservaCard = ({
               <Button
                 size="sm"
                 onClick={() => setShowAvaliacao(true)}
-                className="flex-1 bg-purple-600 hover:bg-purple-700"
+                className="flex-1 min-w-0 bg-purple-600 hover:bg-purple-700"
               >
-                <Star className="w-4 h-4 mr-1" />
-                Avaliar
+                <Star className="w-4 h-4 mr-1 shrink-0" />
+                <span className="truncate">Avaliar</span>
               </Button>
             )}
           </div>

@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import BotaoSeguir from '@/components/perfil/BotaoSeguir';
 import { supabase } from '@/integrations/supabase/client';
+import { buildItemImageUrl } from '@/lib/cdn';
 import {
   MapPin,
   Package,
@@ -346,9 +347,12 @@ const MaeSeguidaCard: React.FC<MaeSeguidaCardProps> = ({
                   <div key={item.id} className="flex-shrink-0">
                     <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100">
                       <img
-                        src={item.fotos[0] || '/placeholder-item.jpg'}
+                        src={item.fotos?.[0] ? buildItemImageUrl(item.fotos[0]) : '/placeholder.svg'}
                         alt={item.titulo}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = '/placeholder.svg';
+                        }}
                       />
                     </div>
                   </div>

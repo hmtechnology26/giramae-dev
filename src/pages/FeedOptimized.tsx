@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { Plus, MapPin, Search, Filter, Truck, Car } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,12 +29,15 @@ import SEOHead from '@/components/seo/SEOHead';
 import { pageTitle } from '@/lib/pageTitle';
 import { useTourTrigger } from '@/modules/onboarding';
 import { Badge } from '@/components/ui/badge';
+import { useCarteira } from '@/hooks/useCarteira';
 import { cn } from '@/lib/utils';
 
 const FeedOptimized = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
+  const { verificarSaldo, saldo } = useCarteira();
+  const queryClient = useQueryClient();
 
   // ✅ ANALYTICS: Rastrear visualização do feed
   useEffect(() => {
@@ -233,6 +237,7 @@ const FeedOptimized = () => {
       }, 2000);
 
       await refetch();
+      queryClient.invalidateQueries({ queryKey: ['carteira'] });
       return true;
     } catch (err) {
       console.error('Erro ao entrar na fila:', err);
@@ -307,6 +312,18 @@ const FeedOptimized = () => {
 
   // Handlers para ações dos itens
   const handleReservarItem = async (itemId: string) => {
+    const item = itens.find(i => i.id === itemId);
+    if (!item) return;
+
+    if (!verificarSaldo(item.valor_girinhas)) {
+      toast({
+        title: "Saldo insuficiente",
+        description: `Você precisa de pelo menos ${item.valor_girinhas} G$ para reservar este item. Seu saldo atual: ${saldo} G$`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       await entrarNaFila(itemId);
     } catch (error) {
@@ -411,8 +428,6 @@ const FeedOptimized = () => {
 
           {/* ✅ FILTROS E BUSCA */}
           <div data-tour="filters-panel" className="p-4 md:p-3 mb-12 bg-white/50 backdrop-blur-xl border border-white/80 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] rounded-[3rem] relative overflow-hidden group" style={{ marginTop: "-1rem" }}>
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary via-purple-400 to-blue-400 opacity-80" />
-
             {/* Campo de busca com ícone de filtro */}
             <div className="relative mb-0 flex flex-col md:flex-row gap-4">
               <div className="relative flex-1 group/search">
@@ -444,7 +459,7 @@ const FeedOptimized = () => {
 
             {/* Filtros Avançados */}
             {mostrarFiltrosAvancados && (
-              <div className="space-y-10 border-t border-primary/5 pt-10 mt-8 animate-in slide-in-from-top-4 duration-700 ease-out z-20 relative">
+              <div className="space-y-10 border-t border-primary/5 pt-10 mt-8 animate-in slide-in-from-top-4 duration-700 ease-out z-20 relative bg-white rounded-[2rem] p-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                   {/* Seção Opções e Localização */}
                   <div className="space-y-8">

@@ -61,6 +61,7 @@ export const useReservas = () => {
     queries.forEach(queryKey => {
       queryClient.invalidateQueries({ queryKey: [queryKey] });
     });
+    queryClient.invalidateQueries({ queryKey: ['carteira'] });
   };
 
   const fetchReservas = async () => {

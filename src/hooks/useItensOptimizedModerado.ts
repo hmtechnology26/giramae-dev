@@ -117,7 +117,7 @@ export const useItensFeedModerado = (limite: number = 20) => {
       }
     },
     staleTime: 1000 * 60 * 3, // 3 minutos (feed precisa ser mais atualizado)
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
     enabled: true
   });
 };
@@ -149,7 +149,7 @@ export const useItensAdminModerado = (limite: number = 50) => {
       }
     },
     staleTime: 1000 * 60 * 2, // 2 minutos (admin precisa ver dados atualizados)
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
     enabled: true
   });
 };
