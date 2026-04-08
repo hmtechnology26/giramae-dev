@@ -129,9 +129,9 @@ const Header = () => {
     { label: 'Seguindo', path: '/maes-seguidas', icon: UserCheck },
     { label: 'Reservas', path: '/minhas-reservas', icon: Package },
     { label: 'Indicações', path: '/indicacoes', icon: Users },
-    { label: 'Apoiadores', path: '/apoiadores', icon: HeartHandshake },
+    { label: 'Apoiadores', path: '/apoiadores', icon: BicepsFlexed },
     { label: 'Blog', path: '/blog', icon: Rss },
-    { label: 'Parcerias', path: '/parcerias', icon: HeartHandshake },];
+    ];
 
   /* ------------------ HEADER DESLOGADO ------------------ */
 
@@ -139,9 +139,9 @@ const Header = () => {
     return (
       <header className="w-full fixed top-2 left-3 right-3 md:left-6 md:right-6 z-50 rounded-full mx-auto max-w-6xl transition-all duration-500">
         <div className="bg-white/60 backdrop-blur-3xl border border-white/80 rounded-full px-4 md:px-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]">
-          <div className="flex justify-between items-center h-18 md:h-20">
+          <div className="flex justify-between items-center h-16 md:h-20">
             <Link to="/" className="flex items-center group transition-all duration-500">
-              <img src="/giramae_logo.png" alt="Logo" className="h-[36px] md:h-[60px] w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
+              <img src="/giramae_logo.png" alt="Logo" className="h-[30px] md:h-[60px] w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
             </Link>
 
             <div className="flex items-center gap-4 md:gap-6">
@@ -165,10 +165,10 @@ const Header = () => {
       <header className="fixed top-1 left-3 right-3 md:left-6 md:right-6 z-40 rounded-full mx-auto max-w-7xl transition-all duration-500">
         <div className="bg-white/70 backdrop-blur-3xl border border-white/90 rounded-full px-4 md:px-8 shadow-[0_32px_64px_-16px_rgba(235,51,148,0.12)]">
           <div className="w-full max-w-7xl mx-auto">
-            <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center h-20 gap-3">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center h-16 md:h-20 gap-2 md:gap-3">
               {/* -------------- LOGO -------------- */}
               <Link to="/feed" className="flex items-center transition-all duration-500 active:scale-95 group shrink-0 pr-2">
-                <img src="/giramae_logo.png" alt="Logo" className="h-[48px] md:h-[54px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
+                <img src="/giramae_logo.png" alt="Logo" className="h-[34px] md:h-[54px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
               </Link>
 
               {/* -------------- MENU CENTRAL -------------- */}
@@ -230,20 +230,20 @@ const Header = () => {
               </div>
 
               {/* -------------- MOBILE BUTTON -------------- */}
-              <div className="md:hidden flex items-center gap-2">
+              <div className="md:hidden flex items-center gap-1.5">
                 {!shouldHideMenus && <SaldoHeader />}
                 {!shouldHideMenus && <div className="scale-90"><NotificationBell /></div>}
                 {!shouldHideMenus ? (
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="rounded-full p-2 h-10 w-10"
+                    className="rounded-full p-1.5 h-9 w-9"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                    {mobileMenuOpen ? <X className="h-5 w-5 text-primary" /> : <Menu className="h-5 w-5 text-primary" />}
+                    {mobileMenuOpen ? <X className="h-4 w-4 text-primary" /> : <Menu className="h-4 w-4 text-primary" />}
                   </Button>
                 ) : (
-                  <Button variant="ghost" size="sm" className="rounded-full h-10 w-10" onClick={handleSignOut}>
-                    <X className="h-5 w-5 text-primary" />
+                  <Button variant="ghost" size="sm" className="rounded-full h-9 w-9" onClick={handleSignOut}>
+                    <X className="h-4 w-4 text-primary" />
                   </Button>
                 )}
               </div>

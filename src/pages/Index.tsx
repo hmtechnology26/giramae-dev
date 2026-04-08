@@ -118,45 +118,45 @@ const LandingPageOptimized = () => {
       />
       <Header />
 
-      <main className="flex-grow pt-24 md:pt-28">
+      <main className="flex-grow pt-20 md:pt-28">
         {/* HERO SECTION - REFINED FONT SIZES */}
-        <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+        <section className="relative min-h-[72vh] md:min-h-[85vh] flex flex-col items-center justify-center px-4 md:px-6 overflow-hidden">
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full -z-10 opacity-50" />
 
           <div className="max-w-5xl mx-auto text-center z-10">
-            <div className="flex justify-center mb-8 mt-4">
-              <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary font-bold tracking-[0.2em] uppercase text-[10px] bg-white/50 backdrop-blur-md">
+            <div className="flex justify-center mb-5 md:mb-8 mt-2 md:mt-4">
+              <Badge variant="outline" className="px-4 md:px-6 py-2 rounded-full border-primary/20 text-primary font-bold tracking-[0.16em] md:tracking-[0.2em] uppercase text-[9px] md:text-[10px] bg-white/50 backdrop-blur-md">
                 Rede Exclusiva para Mães
               </Badge>
             </div>
 
-            <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[1.05] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
-              Onde <span className="text-glow text-primary italic">Mães</span> se apoiam <br />
+            <h1 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tight mb-4 md:mb-8 leading-[1.05] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+              Onde <span className="text-glow text-primary italic">Mães</span> se apoiam <br className="hidden md:block" />
               e o <span className="text-glow text-primary">amor</span> circula.
             </h1>
 
-            <p className="text-xl md:text-2xl text-foreground/40 mb-12 max-w-2xl mx-auto leading-relaxed font-medium animate-in fade-in slide-in-from-bottom-2 duration-700 delay-300">
+            <p className="text-base md:text-2xl text-foreground/50 mb-7 md:mb-12 max-w-2xl mx-auto leading-relaxed font-medium animate-in fade-in slide-in-from-bottom-2 duration-700 delay-300">
               Transforme desapegos em novas histórias. Um espaço de confiança e economia para o futuro dos pequenos.
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-6 animate-in fade-in slide-in-from-bottom-2 duration-700 delay-500">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 animate-in fade-in slide-in-from-bottom-2 duration-700 delay-500">
               <Button
                 size="lg"
                 asChild
-                className="founders-button text-white px-12 h-16 text-lg rounded-full shadow-2xl shadow-primary/20 group"
+                className="founders-button text-white px-8 md:px-12 h-14 md:h-16 text-sm md:text-lg rounded-full shadow-2xl shadow-primary/20 group"
               >
                 <Link to={user ? "/feed" : "/auth"} className="flex items-center">
                   {user ? "Acessar Plataforma" : "Começar Agora"}
-                  <ArrowRight className="ml-2.5 h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2.5 h-5 w-5 md:h-6 md:w-6 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <Button size="lg" variant="ghost" className="px-12 h-16 text-lg rounded-full text-foreground/60 hover:bg-white/50 hover:text-primary transition-all backdrop-blur-sm border border-transparent hover:border-primary/10" asChild>
+              <Button size="lg" variant="ghost" className="px-8 md:px-12 h-14 md:h-16 text-sm md:text-lg rounded-full text-foreground/60 hover:bg-white/50 hover:text-primary transition-all backdrop-blur-sm border border-transparent hover:border-primary/10" asChild>
                 <a href="#como-funciona">Ver detalhes</a>
               </Button>
             </div>
           </div>
 
-          <div className="mt-12 md:mt-16 w-full max-w-5xl px-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-700">
+          <div className="hidden md:block mt-12 md:mt-16 w-full max-w-5xl px-4 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-700">
             <div className="relative rounded-[3rem] overflow-hidden bg-white/40 backdrop-blur-xl border border-white/60 p-4 shadow-2xl">
               <div className="rounded-[2.5rem] overflow-hidden bg-muted aspect-[21/9] relative">
                 <img
@@ -169,8 +169,40 @@ const LandingPageOptimized = () => {
           </div>
         </section>
 
+        <section className="md:hidden px-4 pb-10">
+          <div className="max-w-md mx-auto space-y-4">
+            <div className="premium-card rounded-[2rem] bg-white/70 backdrop-blur-xl border border-primary/5 p-5">
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-primary mb-3">Como funciona</p>
+              <div className="grid grid-cols-1 gap-3">
+                {[
+                  { n: "1", t: "Cadastre", d: "Crie sua conta e publique as peças." },
+                  { n: "2", t: "Troque", d: "Use Girinhas para reservar o que precisa." },
+                  { n: "3", t: "Combine", d: "Finalize a entrega com segurança." },
+                ].map((step) => (
+                  <div key={step.n} className="flex items-start gap-3 rounded-2xl bg-white/80 p-4 border border-primary/5">
+                    <div className="w-9 h-9 rounded-full bg-primary text-white font-black flex items-center justify-center shrink-0">{step.n}</div>
+                    <div className="min-w-0">
+                      <h3 className="font-black text-foreground text-sm">{step.t}</h3>
+                      <p className="text-xs leading-relaxed text-foreground/55 mt-1">{step.d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="premium-card rounded-[2rem] bg-white/70 backdrop-blur-xl border border-primary/5 p-5 space-y-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">O que você encontra</p>
+              <ul className="space-y-2 text-sm text-foreground/60">
+                <li className="flex gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />Trocas locais e seguras.</li>
+                <li className="flex gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />Girinhas como moeda interna.</li>
+                <li className="flex gap-2"><CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />Comunidade feita para mães.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* ESSÊNCIA - ORGANIZED BLOCKS */}
-        <section className="py-16 md:py-18 px-6">
+        <section className="hidden md:block py-16 md:py-18 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
               <Badge variant="outline" className="px-6 py-2 rounded-full border-primary/20 text-primary font-bold tracking-[0.2em] uppercase text-[10px] bg-white/50 backdrop-blur-md">
@@ -194,7 +226,7 @@ const LandingPageOptimized = () => {
         </section>
 
         {/* REASONS - COMPACT & REFINED */}
-        <section className="py-16 md:py-16 px-6 relative overflow-hidden">
+        <section className="hidden md:block py-16 md:py-16 px-6 relative overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
               <div className="space-y-12">
@@ -241,7 +273,7 @@ const LandingPageOptimized = () => {
         </section>
 
         {/* HOW IT WORKS CTA */}
-        <section id="como-funciona" className="py-16 md:py-16 px-6">
+        <section id="como-funciona" className="hidden md:block py-16 md:py-16 px-6">
           <div className="max-w-5xl mx-auto text-center space-y-10 md:space-y-12">
             <h2 className="text-5xl md:text-[6rem] font-black text-foreground tracking-tighter leading-none italic opacity-90">Como Funciona</h2>
 
@@ -272,7 +304,7 @@ const LandingPageOptimized = () => {
 
         {/* MISSIONS */}
         {missoes && missoes.length > 0 && (
-          <section className="py-16 md:py-10 px-6">
+          <section className="hidden md:block py-16 md:py-10 px-6">
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-center mb-12 md:mb-16 gap-8">
                 <div className="w-full ml-36 space-y-2 flex flex-col items-center">
@@ -307,7 +339,7 @@ const LandingPageOptimized = () => {
         )}
 
         {/* FAQ */}
-        <section id="faq" className="py-16 md:py-16 px-6">
+        <section id="faq" className="hidden md:block py-16 md:py-16 px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
               <div className="w-full flex flex-col items-center">
@@ -350,7 +382,7 @@ const LandingPageOptimized = () => {
         </section>
 
         {/* CTA FINAL */}
-        <section className="py-20 md:py-32 px-6 relative overflow-hidden bg-primary shadow-[0_-20px_50px_rgba(235,51,148,0.1)]">
+        <section className="hidden md:block py-20 md:py-32 px-6 relative overflow-hidden bg-primary shadow-[0_-20px_50px_rgba(235,51,148,0.1)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.15),transparent_60%)]" />
           <div className="max-w-5xl mx-auto text-center relative space-y-12">
             <h2 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.9] text-white">
