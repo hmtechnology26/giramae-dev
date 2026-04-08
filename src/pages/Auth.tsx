@@ -69,7 +69,7 @@ const Auth = () => {
                 <div className="relative flex h-24 w-24 items-center justify-center rounded-[2.25rem] border border-primary/5 bg-white p-4 shadow-[0_18px_50px_-18px_rgba(0,0,0,0.18)] group md:h-28 md:w-28 md:rounded-[2.5rem] md:p-5">
                   <div className="absolute inset-0 rounded-[2.5rem] bg-primary/5 blur-xl opacity-0 transition-opacity duration-1000 group-hover:opacity-100" />
                   <img
-                    src="/icon-192.png"
+                    src="/icon-512.png"
                     className="relative z-10 h-full w-full scale-110 object-contain"
                     alt="Logo"
                   />
