@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { User, Menu, X, ChevronDown, Home, Plus, Package, Rss, Trophy, Megaphone, Users, Wallet, HeartHandshake, Heart, UserCheck, Settings, LogOut } from 'lucide-react';
+import { User, Menu, BicepsFlexed, X, ChevronDown, Home, Plus, Package, Rss, Trophy, Megaphone, Users, Wallet, HeartHandshake, Heart, UserCheck, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -54,7 +54,7 @@ const DesktopNav = () => {
 
         <NavLink to="/missoes" icon={Trophy}>Missões</NavLink>
         <NavLink to="/indicacoes" icon={Users}>Indicações</NavLink>
-        <NavLink to="/apoiadores" icon={HeartHandshake}>Apoiadores</NavLink>
+        <NavLink to="/apoiadores" icon={BicepsFlexed}>Apoiadores</NavLink>
       </div>
     </nav>
   );
@@ -135,7 +135,7 @@ const Header = () => {
         <div className="bg-white/60 backdrop-blur-3xl border border-white/80 rounded-full px-4 md:px-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)]">
           <div className="flex justify-between items-center h-18 md:h-20">
             <Link to="/" className="flex items-center group transition-all duration-500">
-              <img src="/giramae_logo.png" alt="Logo" className="h-[36px] md:h-[56px] w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
+              <img src="/giramae_logo.png" alt="Logo" className="h-[36px] md:h-[60px] w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
             </Link>
 
             <div className="flex items-center gap-4 md:gap-6">
@@ -162,7 +162,7 @@ const Header = () => {
             <div className="flex justify-between items-center h-20">
               {/* -------------- LOGO -------------- */}
               <Link to="/feed" className="flex items-center transition-all duration-500 active:scale-95 group">
-                <img src="/giramae_logo.png" alt="Logo" className="h-[44px] md:h-[48px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
+                <img src="/giramae_logo.png" alt="Logo" className="h-[48px] md:h-[60px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
               </Link>
 
               {/* -------------- MENU CENTRAL -------------- */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
               <img
                 src="/giramae_logo.png"
                 alt="Logo GiraMãe"
-                className="h-10 w-auto transition-transform duration-500 group-hover:scale-105"
+                className="h-12 w-auto transition-transform duration-500 group-hover:scale-105"
               />
             </Link>
             <p className="text-foreground/40 text-sm font-medium leading-relaxed max-w-sm">
@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
             <h3 className="text-[10px] font-bold text-foreground/30 uppercase tracking-[0.2em]">Localização Atual</h3>
             <div className="premium-card p-6 bg-white/50 border-0 rounded-3xl shadow-lg border border-primary/5 flex items-start gap-4">
               <div className="bg-primary/10 p-2 rounded-xl">
-                <Sparkles className="w-5 h-5 text-primary" />
+                <MapPin className="w-5 h-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm font-bold text-foreground/80">Canoas, RS</p>

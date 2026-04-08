@@ -1,30 +1,33 @@
-import React from 'react';
-import Header from '@/components/shared/Header';
-import QuickNav from '@/components/shared/QuickNav';
-import Footer from '@/components/shared/Footer';
-import SEOHead from '@/components/seo/SEOHead';
-import { pageTitle } from '@/lib/pageTitle';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { apoiadores, ApoiadorTier } from '@/data/apoiadores';
-import { HeartHandshake, Sparkles, ExternalLink, Building2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Header from "@/components/shared/Header";
+import QuickNav from "@/components/shared/QuickNav";
+import Footer from "@/components/shared/Footer";
+import SEOHead from "@/components/seo/SEOHead";
+import { pageTitle } from "@/lib/pageTitle";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { apoiadores, ApoiadorTier } from "@/data/apoiadores";
+import { ExternalLink, Building2, BicepsFlexed } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const tierLabel: Record<ApoiadorTier, string> = {
-  principal: 'Apoiador Principal',
-  ouro: 'Apoiador Ouro',
-  prata: 'Apoiador Prata',
-  apoio: 'Apoiador'
+  principal: "Apoiador Principal",
+  ouro: "Apoiador Ouro",
+  prata: "Apoiador Prata",
+  apoio: "Apoiador",
 };
 
-const tierOrder: ApoiadorTier[] = ['principal', 'ouro', 'prata', 'apoio'];
+const tierOrder: ApoiadorTier[] = ["principal", "ouro", "prata", "apoio"];
 
-const tierBadgeVariant: Record<ApoiadorTier, 'default' | 'secondary' | 'outline'> = {
-  principal: 'default',
-  ouro: 'secondary',
-  prata: 'outline',
-  apoio: 'outline'
+const tierBadgeVariant: Record<
+  ApoiadorTier,
+  "default" | "secondary" | "outline"
+> = {
+  principal: "default",
+  ouro: "secondary",
+  prata: "outline",
+  apoio: "outline",
 };
 
 const Apoiadores = () => {
@@ -50,25 +53,34 @@ const Apoiadores = () => {
       <main className="container flex flex-col items-center justify-center mx-auto pt-32 pb-24 px-4 w-full max-w-[1600px]">
         <div className="mb-12 flex flex-col items-center text-center w-full space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1 bg-white/40 backdrop-blur-xl border border-white/60 rounded-full text-[10px] font-black uppercase tracking-widest text-primary shadow-sm">
-            <HeartHandshake className="w-4 h-4" /> Apoiadores
+            <BicepsFlexed className="w-4 h-4" /> Apoiadores
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-foreground tracking-tight flex items-center justify-center gap-3 w-full">
-            Empresas que fazem <span className="text-glow text-primary italic">parte</span>
+            Empresas que fazem{" "}
+            <span className="text-glow text-primary italic">parte</span>
           </h1>
           <p className="text-foreground/40 font-medium max-w-2xl mx-auto leading-relaxed">
-            Apoiadores ajudam o GiraMãe a crescer com sustentabilidade — e, em troca, a marca ganha visibilidade dentro da
-            plataforma.
+            Apoiadores ajudam o GiraMãe a crescer com sustentabilidade — e, em
+            troca, a marca ganha visibilidade dentro da plataforma.
           </p>
 
           <div className="flex items-center justify-center gap-8 pt-6">
             <div className="text-center">
-              <p className="text-4xl font-black text-foreground tracking-tighter">{totalApoiadores}</p>
-              <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest">Empresas</p>
+              <p className="text-4xl font-black text-foreground tracking-tighter">
+                {totalApoiadores}
+              </p>
+              <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest">
+                Empresas
+              </p>
             </div>
             <div className="w-px h-12 bg-primary/10" />
             <div className="text-center">
-              <p className="text-4xl font-black text-primary tracking-tighter">+ impacto</p>
-              <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest">na comunidade</p>
+              <p className="text-4xl font-black text-primary tracking-tighter">
+                + impacto
+              </p>
+              <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest">
+                na comunidade
+              </p>
             </div>
           </div>
         </div>
@@ -81,10 +93,13 @@ const Apoiadores = () => {
                   <Building2 className="w-8 h-8 text-foreground/40" />
                 </div>
                 <div className="space-y-2">
-                  <h2 className="text-2xl font-black text-foreground tracking-tight">Sua empresa pode ser a primeira</h2>
+                  <h2 className="text-2xl font-black text-foreground tracking-tight">
+                    Sua empresa pode ser a primeira
+                  </h2>
                   <p className="text-foreground/50 font-medium max-w-xl mx-auto">
-                    Estamos abrindo espaço para apoiadores com contrapartidas de visibilidade e impacto. Fale com a gente e
-                    vamos construir essa parceria.
+                    Estamos abrindo espaço para apoiadores com contrapartidas de
+                    visibilidade e impacto. Fale com a gente e vamos construir
+                    essa parceria.
                   </p>
                 </div>
                 <Button
@@ -92,7 +107,7 @@ const Apoiadores = () => {
                   className="founders-button px-10 h-12 text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-lg shadow-primary/20"
                 >
                   <Link to="/contato">
-                    <Sparkles className="w-4 h-4 mr-2" />
+                    <BicepsFlexed className="w-4 h-4 mr-2" />
                     Quero apoiar
                   </Link>
                 </Button>
@@ -105,14 +120,20 @@ const Apoiadores = () => {
                 if (items.length === 0) return null;
 
                 return (
-                  <Card key={tier} className="premium-card rounded-[2.5rem] border border-white/60 bg-white/40">
+                  <Card
+                    key={tier}
+                    className="premium-card rounded-[2.5rem] border border-white/60 bg-white/40"
+                  >
                     <CardHeader className="pb-4">
                       <CardTitle className="flex items-center gap-3 font-black tracking-tight text-foreground">
                         <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-                          <HeartHandshake className="w-5 h-5 text-primary" />
+                          <BicepsFlexed className="w-5 h-5 text-primary" />
                         </div>
                         <span>{tierLabel[tier]}</span>
-                        <Badge variant={tierBadgeVariant[tier]} className="ml-auto rounded-full">
+                        <Badge
+                          variant={tierBadgeVariant[tier]}
+                          className="ml-auto rounded-full"
+                        >
                           {items.length}
                         </Badge>
                       </CardTitle>
@@ -126,23 +147,31 @@ const Apoiadores = () => {
                           >
                             <CardContent className="p-6 space-y-4">
                               <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-2xl bg-white/70 border border-white/60 flex items-center justify-center overflow-hidden shrink-0">
-                                  {apoiador.logoUrl ? (
-                                    <img
-                                      src={apoiador.logoUrl}
-                                      alt={apoiador.nome}
-                                      className="w-full h-full object-contain p-2"
-                                      loading="lazy"
-                                    />
-                                  ) : (
-                                    <span className="text-sm font-black text-foreground/40">
-                                      {apoiador.nome.slice(0, 2).toUpperCase()}
-                                    </span>
-                                  )}
+                                <div className="relative w-20 h-20 shrink-0">
+                                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-yellow-400 p-[2px]">
+                                    <div className="w-full h-full rounded-full bg-white/80 flex items-center justify-center overflow-hidden">
+                                      {apoiador.logoUrl ? (
+                                        <img
+                                          src={apoiador.logoUrl}
+                                          alt={apoiador.nome}
+                                          className="w-full h-full object-cover"
+                                          loading="lazy"
+                                        />
+                                      ) : (
+                                        <span className="text-sm font-black text-foreground/40">
+                                          {apoiador.nome
+                                            .slice(0, 2)
+                                            .toUpperCase()}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
                                 </div>
 
                                 <div className="min-w-0 space-y-1">
-                                  <p className="font-black text-foreground tracking-tight truncate">{apoiador.nome}</p>
+                                  <p className="font-black text-foreground tracking-tight truncate">
+                                    {apoiador.nome}
+                                  </p>
                                   {apoiador.categoria && (
                                     <p className="text-[10px] font-black uppercase tracking-widest text-foreground/30 truncate">
                                       {apoiador.categoria}
@@ -158,13 +187,24 @@ const Apoiadores = () => {
                               )}
 
                               <div className="flex items-center justify-between gap-3">
-                                <Badge variant="outline" className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-widest">
+                                <Badge
+                                  variant="outline"
+                                  className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-widest"
+                                >
                                   {tierLabel[tier]}
                                 </Badge>
 
                                 {apoiador.websiteUrl ? (
-                                  <Button asChild variant="outline" className="rounded-2xl">
-                                    <a href={apoiador.websiteUrl} target="_blank" rel="noreferrer">
+                                  <Button
+                                    asChild
+                                    variant="outline"
+                                    className="rounded-2xl"
+                                  >
+                                    <a
+                                      href={apoiador.websiteUrl}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
                                       <ExternalLink className="w-4 h-4 mr-2" />
                                       Visitar
                                     </a>
@@ -185,10 +225,15 @@ const Apoiadores = () => {
           <Card className="premium-card rounded-[2.5rem] bg-gradient-to-r from-purple-50/60 to-pink-50/60 border border-white/60">
             <CardContent className="p-8 flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="space-y-2 text-center md:text-left">
-                <p className="text-[10px] font-black text-primary uppercase tracking-widest">Visibilidade + Impacto</p>
-                <h3 className="text-2xl font-black text-foreground tracking-tight">Sua marca dentro do GiraMãe</h3>
+                <p className="text-[10px] font-black text-primary uppercase tracking-widest">
+                  Visibilidade + Impacto
+                </p>
+                <h3 className="text-2xl font-black text-foreground tracking-tight">
+                  Sua marca dentro do GiraMãe
+                </h3>
                 <p className="text-foreground/50 font-medium max-w-2xl">
-                  Criamos espaços para apoiadores aparecerem com logo, descrição e link. Quer entrar nessa lista?
+                  Criamos espaços para apoiadores aparecerem com logo, descrição
+                  e link. Quer entrar nessa lista?
                 </p>
               </div>
               <Button
@@ -196,7 +241,7 @@ const Apoiadores = () => {
                 className="founders-button px-10 h-12 text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-lg shadow-primary/20"
               >
                 <Link to="/contato">
-                  <Sparkles className="w-4 h-4 mr-2" />
+                  <BicepsFlexed className="w-4 h-4 mr-2" />
                   Seja apoiador
                 </Link>
               </Button>

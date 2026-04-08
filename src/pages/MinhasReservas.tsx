@@ -120,7 +120,7 @@ const MinhasReservas = () => {
     return [
       {
         icon: Package,
-        title: "Minhas Reservas",
+        title: "Reservas Ativas",
         value: minhasReservasAtivas.length,
         color: "text-primary",
         bg: "bg-primary/5",
@@ -136,7 +136,7 @@ const MinhasReservas = () => {
       },
       {
         icon: Clock,
-        title: "Minhas Reservas",
+        title: "Minhas Vendas",
         value: meusItensReservados.length,
         color: "text-orange-600",
         bg: "bg-orange-50",

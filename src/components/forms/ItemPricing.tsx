@@ -2,7 +2,7 @@
 import React from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Sparkles } from "lucide-react";
+import { BadgeDollarSign } from "lucide-react";
 
 interface ItemPricingProps {
   preco: string;
@@ -59,8 +59,8 @@ export const ItemPricing: React.FC<ItemPricingProps> = ({
       <div className="space-y-4">
         <Label className="text-sm font-bold text-foreground/70 ml-1 uppercase tracking-wider flex items-center gap-2">
           Quantidade de Girinhas
-          <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-          <span className="text-primary">*</span>
+          
+          <span className="text-primary text-xl animate-pulse">*</span>
         </Label>
 
         <div className="relative group">
@@ -73,11 +73,11 @@ export const ItemPricing: React.FC<ItemPricingProps> = ({
             className="h-14 text-2xl font-bold border-primary/10 focus:border-primary/30 focus:ring-primary/5 rounded-2xl bg-white/50 pl-14 transition-all"
           />
           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-primary">
-            <Sparkles className="w-6 h-6" />
+            <img src="./girinha_frente.png" alt="" className="w-10 h-auto -ml-1" />
           </div>
         </div>
 
-        <p className="text-xs text-muted-foreground font-light italic ml-1">✨ 1 Girinha equivale ao valor simbólico de R$ 1,00 para troca.</p>
+        <p className="text-xs text-muted-foreground font-light italic ml-1">* 1 Girinha equivale ao valor simbólico de R$ 1,00 para troca.</p>
         {errors.preco && <p className="text-destructive text-xs mt-1 font-medium">{errors.preco}</p>}
       </div>
 
@@ -99,7 +99,7 @@ export const ItemPricing: React.FC<ItemPricingProps> = ({
                   }`}
               >
                 {valor}
-                <Sparkles className={`w-3 h-3 ${preco === valor.toString() ? 'text-white' : 'text-primary/40'}`} />
+                <BadgeDollarSign className={`w-3 h-3 ${preco === valor.toString() ? 'text-white' : 'text-primary/40'}`} />
               </button>
             ))}
           </div>

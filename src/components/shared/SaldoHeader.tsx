@@ -30,7 +30,7 @@ const SaldoHeader: React.FC = () => {
   />
       
       <div className="flex flex-col">
-        <span className="text-[10px] md:text-xs text-gray-500 font-bold leading-none">SALDO</span>
+        <span className="text-[10px] md:text-xs text-gray-500 font-bold leading-none">G$</span>
         <span className="text-xs md:text-sm font-bold text-pink-700 leading-tight">
           {saldo.toFixed(2)}
         </span>

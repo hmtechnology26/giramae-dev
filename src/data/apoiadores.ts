@@ -11,8 +11,8 @@ export interface Apoiador {
 }
 
 export const apoiadores: Apoiador[] = [
-  { id: 'hmtech', nome: 'HM Technology', tier: 'ouro', categoria: 'Tecnologia', websiteUrl: 'https://www.instagram.com/hmtech_oficial?igsh=cWc0eDlxNTZtMjY=', logoUrl: '/logos/hm_logo.jpg' },
-  { id: 'elah', nome: 'Elah Essence', tier: 'ouro', categoria: 'Joias', websiteUrl: 'https://www.instagram.com/elah.essence?igsh=aW4wN2ZmYmt2Z2t4', logoUrl: '/logos/elah_logo.jpg' },
+  { id: 'hmtech', nome: 'HM Technology', tier: 'ouro', categoria: 'Tecnologia', websiteUrl: 'https://www.instagram.com/hmtech_oficial?igsh=cWc0eDlxNTZtMjY=', logoUrl: '/logos/hm_logo.png' },
+  { id: 'elah', nome: 'Elah Essence', tier: 'ouro', categoria: 'Joias', websiteUrl: 'https://www.instagram.com/elah.essence?igsh=aW4wN2ZmYmt2Z2t4', logoUrl: '/logos/elah_logo.png' },
   // { id: 'zapzou', nome: 'ZapZou', tier: 'ouro', categoria: 'Joias', websiteUrl: 'https://www.zapzou.com/zapzou?igsh=cWc0eDlxNTZtMjY=', logoUrl: '/logos/zapzou_logo.jpg' },
 
 ];

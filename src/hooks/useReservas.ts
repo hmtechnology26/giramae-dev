@@ -78,8 +78,7 @@ export const useReservas = () => {
         .from('reservas')
         .select(`*, codigo_confirmacao, itens (titulo, fotos, valor_girinhas, codigo_unico)`)
         .or(`usuario_reservou.eq.${user.id},usuario_item.eq.${user.id}`)
-        .order('created_at', { ascending: false })
-        .limit(20);
+        .order('created_at', { ascending: false });
       if (reservasError) throw reservasError;
 
       // ✅ BUSCAR FILAS DE ESPERA (incluindo codigo_unico do item)
@@ -87,8 +86,7 @@ export const useReservas = () => {
         .from('fila_espera')
         .select(`*, itens (titulo, fotos, valor_girinhas, publicado_por, codigo_unico)`)
         .eq('usuario_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(10);
+        .order('created_at', { ascending: false });
       if (filasError) throw filasError;
       
       // ✅ COLETAR USER IDs

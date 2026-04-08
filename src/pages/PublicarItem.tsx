@@ -41,7 +41,7 @@ const PublicarItem = () => {
                   Contribua com a Rede
                 </Badge>
                 <h1 className="text-4xl md:text-6xl font-black text-foreground tracking-tight leading-[1.1]">
-                  Novo <span className="text-glow text-primary italic">Desapego</span>
+                  Publicar <span className="text-glow text-primary italic">Novo Item</span>
                 </h1>
                 <p className="text-lg text-foreground/40 font-medium leading-relaxed">Dê uma nova história para peças que foram escolhidas com todo amor do mundo.</p>
               </div>
@@ -51,7 +51,7 @@ const PublicarItem = () => {
 
                 <div className="flex items-center gap-3 mb-10">
                   <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/10">
-                    <Sparkles className="w-6 h-6" />
+                    <Info className="w-6 h-6" />
                   </div>
                   <div className="flex flex-col">
                     <span className="text-[10px] font-black uppercase text-foreground/30 tracking-widest">Guia Essencial</span>
@@ -93,7 +93,9 @@ const PublicarItem = () => {
               </div>
 
               <div className="p-8 bg-primary/5 border border-primary/10 rounded-[3rem] flex items-center gap-5 relative overflow-hidden group">
-                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-primary shadow-xl shadow-primary/10 font-black text-2xl italic shrink-0 border border-primary/5 group-hover:rotate-6 transition-transform">G$</div>
+                <div className="  rounded-full flex items-center justify-center text-primary shadow-xl shadow-primary/10 font-black text-2xl italic shrink-0 border border-primary/5 group-hover:rotate-6 transition-transform">
+                <img src="./girinha_frente.png" alt="Moeda Girinha" className='w-20 h-auto' />
+                </div>
                 <div className="space-y-1">
                   <p className="text-xs font-bold text-primary italic uppercase tracking-widest opacity-60">Economia Circular</p>
                   <p className="text-xs font-medium text-foreground/50 leading-relaxed">Ao publicar, você ganha <strong>reputação</strong> e ajuda a fortalecer nossa economia circular de mães.</p>

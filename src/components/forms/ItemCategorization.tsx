@@ -281,28 +281,28 @@ export const ItemCategorization: React.FC<ItemCategorizationProps> = ({
                     <SelectContent className="bg-white/95 backdrop-blur-xl border-primary/10 rounded-2xl shadow-2xl">
                         <SelectItem value="novo" className="text-base py-3 hover:bg-primary/5 focus:bg-primary/5 transition-colors cursor-pointer text-foreground">
                             <span className="flex items-center gap-3">
-                                <span className="text-xl">✨</span>
+                                <span className="text-xl">⭐</span>
                                 <span className="font-medium">Novo</span>
                             </span>
                         </SelectItem>
-                        <SelectItem value="seminovo" className="text-base py-3 hover:bg-primary/5 focus:bg-primary/5 transition-colors cursor-pointer text-foreground">
+                        {/* <SelectItem value="seminovo" className="text-base py-3 hover:bg-primary/5 focus:bg-primary/5 transition-colors cursor-pointer text-foreground">
                             <span className="flex items-center gap-3">
                                 <span className="text-xl">⭐</span>
                                 <span className="font-medium">Seminovo</span>
                             </span>
-                        </SelectItem>
+                        </SelectItem> */}
                         <SelectItem value="usado" className="text-base py-3 hover:bg-primary/5 focus:bg-primary/5 transition-colors cursor-pointer text-foreground">
                             <span className="flex items-center gap-3">
                                 <span className="text-xl">👍</span>
                                 <span className="font-medium">Usado</span>
                             </span>
                         </SelectItem>
-                        <SelectItem value="muito_usado" className="text-base py-3 hover:bg-primary/5 focus:bg-primary/5 transition-colors cursor-pointer text-foreground">
+                        {/* <SelectItem value="muito_usado" className="text-base py-3 hover:bg-primary/5 focus:bg-primary/5 transition-colors cursor-pointer text-foreground">
                             <span className="flex items-center gap-3">
                                 <span className="text-xl">🔄</span>
                                 <span className="font-medium">Muito Usado</span>
                             </span>
-                        </SelectItem>
+                        </SelectItem> */}
                     </SelectContent>
                 </Select>
                 {errors.estado_conservacao && <p className="text-destructive text-xs mt-1 font-medium">{errors.estado_conservacao}</p>}

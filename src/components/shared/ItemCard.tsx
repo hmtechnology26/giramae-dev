@@ -147,6 +147,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
   const itemIsDisponivel = item.status === 'disponivel';
 
   const canShowWhatsApp = item.publicado_por_profile?.whatsapp &&
+    itemIsReservado &&
     hasActiveReservation &&
     item.publicado_por !== currentUserId;
 
@@ -260,8 +261,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({
 
     const whatsappNumber = item.publicado_por_profile.whatsapp;
     const vendedorNome = item.publicado_por_profile.nome;
-    const mensagem = `Olá ${vendedorNome}! Sobre o item "${item.titulo}" que reservei. Quando podemos combinar a entrega? 😊`;
-    const whatsappUrl = `https://wa.me/55${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
+    const mensagem = `Olá ${vendedorNome}! Sobre o item "${item.titulo}" que reservei. Quando podemos combinar a entrega?`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
 
     try {
       const reservaAtiva = feedData.reservas_usuario.find(r =>
@@ -294,11 +295,11 @@ export const ItemCard: React.FC<ItemCardProps> = ({
 
   const getEstadoColor = (estado: string) => {
     switch (estado) {
-      case 'novo': return 'bg-green-100 text-green-800';
-      case 'seminovo': return 'bg-blue-100 text-blue-800';
-      case 'usado': return 'bg-yellow-100 text-yellow-800';
-      case 'muito_usado': return 'bg-orange-100 text-orange-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'novo': return 'bg-green-100 text-white';
+      case 'seminovo': return 'bg-blue-100 text-white';
+      case 'usado': return 'bg-yellow-100 text-white';
+      case 'muito_usado': return 'bg-orange-100 text-white';
+      default: return 'bg-gray-100 text-white';
     }
   };
 
@@ -325,7 +326,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
       data-tour="item-card"
       className={cn(
         "premium-card group transition-all duration-500 relative overflow-hidden w-full flex flex-col h-full rounded-[2rem]",
-        itemIsReservado && "opacity-60 grayscale-[0.5]"
+        itemIsReservado && "opacity-95"
       )}>
 
       {/* Absolute Overlays */}
@@ -443,14 +444,14 @@ export const ItemCard: React.FC<ItemCardProps> = ({
             )}
 
             <Badge className={cn(
-              "border-0 rounded-full text-[9px] font-bold uppercase tracking-wider px-2",
+              "border-0 rounded-full text-[9px] font-bold uppercase tracking-wider px-2 cursor-pointer",
               getEstadoColor(item.estado_conservacao).replace('bg-', 'bg-opacity-50 ')
             )}>
               {item.estado_conservacao.replace('_', ' ')}
             </Badge>
 
             {item.tamanho_valor && (
-              <Badge variant="outline" className="bg-primary/5 text-primary border-primary/10 rounded-full text-[9px] font-bold uppercase tracking-wider px-2">
+              <Badge variant="outline" className="bg-primary/5 text-primary cursor-pointer border-primary/10 rounded-full text-[9px] font-bold uppercase tracking-wider px-2">
                 {item.tamanho_valor}
               </Badge>
             )}
@@ -481,7 +482,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
             </div>
           )}
 
-          <h3 className="font-bold leading-tight line-clamp-2 text-foreground/80 group-hover:text-primary transition-colors text-base min-h-[2.5rem]">
+          <h3 className="font-bold cursor-pointer leading-tight line-clamp-2 text-foreground/80 group-hover:text-primary transition-colors text-base min-h-[2.5rem]">
             {item.titulo}
           </h3>
 
@@ -494,9 +495,9 @@ export const ItemCard: React.FC<ItemCardProps> = ({
 
           <div className="mt-auto pt-4 flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 group/price bg-primary/5 px-3 py-1.5 rounded-2xl border border-primary/10 transition-all hover:bg-primary/10">
+              <div className="flex items-center gap-2 group/price bg-primary/5 cursor-pointer px-3 py-1.5 rounded-2xl border border-primary/10 transition-all hover:bg-primary/10">
                 <img src="/girinha_sem_fundo.png" alt="girinha" className='w-5 h-5 transition-transform duration-500 group-hover/price:rotate-12' />
-                <span className="text-lg font-black text-primary tracking-tight">
+                <span className="text-lg font-black text-primary tracking-tight ">
                   {valores.total}<span className="text-[15px] ml-0.5">G</span>
                 </span>
               </div>
@@ -509,7 +510,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                 className="p-2 rounded-full hover:bg-primary/5 text-foreground/30 hover:text-primary transition-all"
                 title="Ver detalhes do item"
               >
-                <Download className="w-5 h-5 shadow-sm" />
+                <Info className="w-5 h-5 shadow-sm" />
               </button>
             </div>
 
@@ -586,12 +587,12 @@ export const ItemCard: React.FC<ItemCardProps> = ({
             )}
 
             {canShowWhatsApp && (
-              <div className="bg-green-50/50 border border-green-100 rounded-2xl p-3">
-                <div className="text-[10px] font-bold text-green-700/60 mb-2 text-center uppercase tracking-widest">
+              <div className="bg-green-50 border border-green-200 rounded-2xl p-4 shadow-sm ring-1 ring-green-100/70">
+                <div className="text-[10px] font-bold text-green-800 mb-2 text-center uppercase tracking-widest">
                   Combine a entrega
                 </div>
                 <Button
-                  className="bg-green-500 hover:bg-green-600 text-white w-full rounded-xl h-10 shadow-sm shadow-green-200"
+                  className="bg-green-600 hover:bg-green-700 text-white w-full rounded-xl h-11 shadow-lg shadow-green-200 font-bold border border-green-500/20"
                   onClick={handleWhatsAppClick}
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
@@ -623,7 +624,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({
                 ) : (
                   <div className="flex items-center gap-2">
                     <Upload className="w-5 h-5" />
-                    <span>RESERVAR AGORA</span>
+                    <span>RESERVAR ITEM</span>
                   </div>
                 )}
               </Button>
