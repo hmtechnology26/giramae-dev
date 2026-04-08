@@ -3,17 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Sparkles,
-  Heart,
   ArrowRight,
   CheckCircle,
   ChevronDown,
   Users,
-  Handshake,
   Shield,
-  Lightbulb,
   Trophy,
-  MessageCircle
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/shared/Header";

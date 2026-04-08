@@ -4,7 +4,7 @@ import QuickNav from "@/components/shared/QuickNav";
 import Footer from "@/components/shared/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Wallet, History, ShoppingCart, Send, Sparkles, TrendingUp, Calendar, Clock, ArrowUpRight, ArrowDownLeft } from "lucide-react";
+import { Wallet, History, ShoppingCart, Send, TrendingUp, Calendar, Clock, ArrowUpRight, ArrowDownLeft } from "lucide-react";
 import { useCarteira } from "@/hooks/useCarteira";
 import { useGirinhasExpiracaoSegura } from "@/hooks/useGirinhasExpiracaoSegura";
 import CotacaoWidget from "@/modules/girinhas/components/CotacaoWidget";

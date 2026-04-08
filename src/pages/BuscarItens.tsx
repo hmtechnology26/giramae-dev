@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Filter, Sparkles } from 'lucide-react';
+import { Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -130,7 +130,7 @@ const BuscarItens = () => {
             ) : (
               <Card className="text-center py-12">
                 <CardContent>
-                  <Sparkles className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                  <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold mb-2">Comece a buscar</h3>
                   <p className="text-gray-600">
                     Digite algo no campo acima para encontrar itens incríveis

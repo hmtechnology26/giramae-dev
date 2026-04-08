@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Sparkles, AlertCircle } from 'lucide-react';
+import { LogIn, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
@@ -61,7 +61,7 @@ const GoogleStepV2: React.FC<GoogleStepV2Props> = ({ onComplete }) => {
     <div className="px-6 pb-6 pt-2">
       <div className="text-center mb-6">
         <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-pink-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Sparkles className="w-10 h-10 text-primary" />
+          <LogIn className="w-10 h-10 text-primary" />
         </div>
         <h3 className="text-lg font-semibold text-gray-900 mb-2">
           Entre com sua conta Google

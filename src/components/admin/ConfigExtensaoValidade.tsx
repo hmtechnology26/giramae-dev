@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { Sparkles, Save, AlertCircle } from 'lucide-react';
+import { Clock3, Save, AlertCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -118,7 +118,7 @@ const ConfigExtensaoValidade: React.FC = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-purple-500" />
+          <Clock3 className="w-5 h-5 text-purple-500" />
           Configuração da Extensão de Validade
         </CardTitle>
       </CardHeader>

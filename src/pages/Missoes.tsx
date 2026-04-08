@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Trophy, Target, Users, Sparkles, Gift, Clock, CheckCircle, Star, Zap, Eye, EyeOff } from 'lucide-react';
+import { Trophy, Target, Users, Gift, Clock, CheckCircle, Star, Zap, Eye, EyeOff } from 'lucide-react';
 import { useMissoes } from '@/hooks/useMissoes';
 import { useMissoesSegmentadas } from '@/hooks/useMissoesSegmentadas';
 import AuthGuard from '@/components/auth/AuthGuard';
@@ -24,7 +24,7 @@ const MissionCard: React.FC<{ missao: any; onColetar: (id: string) => void; isCo
       case 'perfil': return Star;
       case 'publicacao': return Target;
       case 'venda': return Gift;
-      case 'compra': return Sparkles;
+      case 'compra': return Gift;
       case 'indicacao': return Users;
       default: return Trophy;
     }

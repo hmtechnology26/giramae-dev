@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePrecoManual } from "@/hooks/usePrecoManual";
-import { TrendingUp, Sparkles } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 
 const CotacaoWidget = () => {
   const { precoManual, isLoading } = usePrecoManual();

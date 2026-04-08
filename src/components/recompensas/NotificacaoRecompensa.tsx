@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Trophy, Gift, Star, X } from "lucide-react";
+import { Stars, Trophy, Gift, Star, X } from "lucide-react";
 import { GiraAvatar } from "@/modules/onboarding/components/GiraAvatar";
 
 interface Recompensa {
@@ -67,13 +67,13 @@ const NotificacaoRecompensa = ({ recompensa, onClose }: NotificacaoRecompensaPro
       case 'avaliacao':
         return <Star className="h-8 w-8 text-blue-500" />;
       case 'indicacao':
-        return <Sparkles className="h-8 w-8 text-purple-500" />;
+        return <Stars className="h-8 w-8 text-purple-500" />;
       case 'cadastro':
         return <Gift className="h-8 w-8 text-pink-500" />;
       case 'jornada':
         return <Trophy className="h-8 w-8 text-pink-500" />;
       default:
-        return <Sparkles className="h-8 w-8 text-primary" />;
+        return <Stars className="h-8 w-8 text-primary" />;
     }
   };
 
@@ -176,7 +176,7 @@ const NotificacaoRecompensa = ({ recompensa, onClose }: NotificacaoRecompensaPro
               <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-2 text-lg shadow-lg animate-pulse">
                 +{recompensa.valor} Girinha{recompensa.valor > 1 ? 's' : ''}
               </Badge>
-              <Sparkles className="h-5 w-5 text-yellow-500 animate-spin" style={{ animationDuration: '3s' }} />
+              <Stars className="h-5 w-5 text-yellow-500 animate-spin" style={{ animationDuration: '3s' }} />
             </div>
             
             {/* Mensagem sobre o saldo */}

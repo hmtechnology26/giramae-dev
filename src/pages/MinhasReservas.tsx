@@ -11,8 +11,7 @@ import {
   CheckCircle,
   Search,
   X,
-  ChevronRight,
-  Sparkles,
+  ChevronRight
 } from "lucide-react";
 import { useReservas } from "@/hooks/useReservas";
 import ReservaCard from "@/components/reservas/ReservaCard";

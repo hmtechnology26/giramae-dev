@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel';
-import { Heart, MapPin, School, Truck, Home, Clock, Users, Sparkles,Upload, CheckCircle, MessageCircle, Car, Info, User, MoreVertical, Flag, ZoomIn, ZoomOut, X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import { Heart, MapPin, School, Truck, Home, Clock, Users, Coins, Upload, CheckCircle, MessageCircle, Car, Info, User, MoreVertical, Flag, ZoomIn, ZoomOut, X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import LazyImage from '@/components/ui/lazy-image';
 import { cn } from '@/lib/utils';
 import { buildItemImageUrl } from '@/lib/cdn';

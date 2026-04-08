@@ -19,7 +19,6 @@ import {
   ChevronLeft,
   RefreshCw,
   Loader,
-  Sparkles,
   Users
 } from 'lucide-react';
 
@@ -325,7 +324,6 @@ const MaesSeguidas = () => {
             {!hasMore && seguindo.length > 0 && (
               <div className="text-center py-12">
                 <div className="inline-flex items-center gap-3 px-8 py-4 bg-white/40 backdrop-blur-xl border border-white/60 rounded-full text-foreground/40 text-[10px] font-black uppercase tracking-widest shadow-sm">
-                  <Sparkles className="w-4 h-4 text-primary" />
                   Você chegou ao fim da sua rede de {totalSeguindo} mães
                 </div>
               </div>

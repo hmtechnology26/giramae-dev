@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Sparkles, Heart, ArrowRight } from "lucide-react";
+import { Heart, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/shared/Header";
 import CompraLivre from "@/components/girinhas/CompraLivre";
@@ -40,7 +40,7 @@ const ComprarGirinhas = () => {
         <div className="container mx-auto px-4 text-center text-muted-foreground">
           <div className="text-2xl font-bold text-primary flex items-center justify-center mb-4">
              <Link to="/" className="flex items-center text-primary">
-                <Sparkles className="h-6 w-6 mr-2" />
+                <Heart className="h-6 w-6 mr-2" />
                 GiraMãe
             </Link>
           </div>

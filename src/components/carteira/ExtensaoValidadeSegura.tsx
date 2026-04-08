@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Sparkles, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
+import { Clock, Clock3, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import { useExtensaoValidadeSegura } from '@/hooks/useExtensaoValidadeSegura';
 import { useCarteira } from '@/hooks/useCarteira';
 
@@ -118,7 +118,7 @@ const ExtensaoValidadeSegura: React.FC<ExtensaoValidadeSeguraProps> = ({
                   disabled={isExtendendo}
                   className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold"
                 >
-                  <Sparkles className="w-4 h-4 mr-2" />
+                  <Clock3 className="w-4 h-4 mr-2" />
                   {isExtendendo ? 'Estendendo...' : `Estender por +${diasExtensao} dias (-${custoExtensao} Girinha${custoExtensao !== 1 ? 's' : ''})`}
                 </Button>
               ) : (

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Heart, Users, Recycle, Shield, ArrowRight, Sparkles } from 'lucide-react';
+import { Heart, Users, Recycle, Shield, ArrowRight, UsersRound } from 'lucide-react';
 
 const ConceitoComunidade = () => {
   return (
@@ -113,7 +113,7 @@ const ConceitoComunidade = () => {
             </div>
             <div className="text-center">
               <div className="w-32 h-32 bg-gradient-to-r from-primary to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-16 h-16 text-white" />
+                <UsersRound className="w-16 h-16 text-white" />
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-2">
                 Juntas Somos Mais Fortes

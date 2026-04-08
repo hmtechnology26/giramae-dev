@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
-import { MoreVertical, Edit, Eye, EyeOff, Trash2, Sparkles, Play } from 'lucide-react';
+import { MoreVertical, Edit, Eye, EyeOff, Trash2, Coins, Play } from 'lucide-react';
 import { useAtualizarItem, Item } from '@/hooks/useItensOptimized';
 import { toast } from '@/components/ui/use-toast';
 import LazyImage from '@/components/ui/lazy-image';
@@ -161,7 +161,7 @@ const ItemCardWithActions: React.FC<ItemCardWithActionsProps> = ({ item }) => {
           </h3>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1">
-              <Sparkles className="w-4 h-4 text-primary" />
+              <Coins className="w-4 h-4 text-primary" />
               <span className="font-bold text-primary">
                 {item.valor_girinhas}
               </span>

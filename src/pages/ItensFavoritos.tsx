@@ -28,7 +28,6 @@ import {
   Search,
   Filter,
   Heart,
-  Sparkles,
   ChevronLeft
 } from 'lucide-react';
 

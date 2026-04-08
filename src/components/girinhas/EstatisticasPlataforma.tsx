@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Heart, TrendingUp, Sparkles } from "lucide-react";
+import { Users, Heart, TrendingUp, Coins } from "lucide-react";
 
 const EstatisticasPlataforma = () => {
   // Dados simulados - em produção viriam de uma API
@@ -18,7 +18,7 @@ const EstatisticasPlataforma = () => {
       cor: "text-pink-600"
     },
     {
-      icon: Sparkles,
+      icon: Coins,
       numero: "50.000+",
       label: "Girinhas em Circulação",
       cor: "text-yellow-600"

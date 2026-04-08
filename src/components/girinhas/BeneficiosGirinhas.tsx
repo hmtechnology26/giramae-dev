@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, Gift, Trophy, Sparkles, TrendingUp } from "lucide-react";
+import { Heart, Star, Gift, Trophy, Coins, TrendingUp } from "lucide-react";
 
 const BeneficiosGirinhas = () => {
   const beneficios = [
@@ -35,7 +35,7 @@ const BeneficiosGirinhas = () => {
     <Card className="bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 border-purple-200">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-center justify-center text-purple-700">
-          <Sparkles className="h-6 w-6" />
+          <Coins className="h-6 w-6" />
           Por que usar Girinhas?
           <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 animate-pulse">
             Vantajoso!

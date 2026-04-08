@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { useMeusItens } from "@/hooks/useItensOptimized";
-import { Star, MapPin, Calendar, Plus, Edit3, Sparkles } from "lucide-react";
+import { Star, MapPin, Calendar, Plus, Heart } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import ItemCardSkeleton from "@/components/loading/ItemCardSkeleton";
@@ -112,9 +112,9 @@ const Perfil = () => {
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Sidebar do Perfil */}
                     <div className="w-full lg:w-1/3">
-                        <div className="premium-card bg-white/70 backdrop-blur-2xl border-white/80 rounded-[3.5rem] p-10 shadow-[0_32px_64px_-16px_rgba(235,51,148,0.12)] space-y-10 sticky top-32 overflow-hidden group transition-all duration-700 hover:shadow-[0_48px_80px_-20px_rgba(235,51,148,0.2)]">
+                        <div className="premium-card bg-white/70 backdrop-blur-2xl border-white/80 rounded-[3.5rem] p-10 space-y-10 sticky top-32 overflow-hidden group transition-all duration-700 hover:shadow-[0_48px_80px_-20px_rgba(235,51,148,0.2)]">
                             {/* Visual Accents */}
-                            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary/30 via-primary to-primary/30" />
+                            <div className="absolute top-0 left-0 right-0 h-1.5  via-primary to-primary/30" />
                             <div className="absolute -right-16 -top-16 w-48 h-48 bg-primary/5 rounded-full blur-[80px] group-hover:bg-primary/10 transition-all duration-1000" />
 
                             <div className="flex flex-col items-center text-center relative z-10">
@@ -127,7 +127,7 @@ const Perfil = () => {
                                         </AvatarFallback>
                                     </Avatar>
                                     <div className="absolute -bottom-2 -left-2 bg-white rounded-2xl p-3 shadow-xl border border-primary/5 z-20 animate-bounce cursor-default">
-                                        <Sparkles className="w-7 h-7 text-primary" />
+                                        <Heart className="w-7 h-7 text-primary" />
                                     </div>
                                 </div>
 
@@ -154,17 +154,7 @@ const Perfil = () => {
                                     </div>
                                 </div>
 
-                                <div className="w-full pt-10">
-                                    <Button
-                                        asChild
-                                        className="founders-button w-full h-16 text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-full shadow-2xl shadow-primary/20"
-                                    >
-                                        <Link to="/editar-perfil">
-                                            <Edit3 className="w-4 h-4 mr-3" />
-                                            Editar Perfil
-                                        </Link>
-                                    </Button>
-                                </div>
+                                
                             </div>
 
                             <div className="space-y-6 pt-6 border-t border-primary/10 relative z-10">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Loader2, Upload, Sparkles, ShieldCheck, Heart, Info } from "lucide-react";
+import { Loader2, Upload, ShieldCheck, Heart, Info } from "lucide-react";
 import { usePublicarItemFormV2 } from '@/hooks/usePublicarItemFormV2';
 import { SimpleItemForm } from '@/components/forms/SimpleItemForm';
 import AuthGuard from '@/components/auth/AuthGuard';

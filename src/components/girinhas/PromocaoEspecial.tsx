@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Gift, Calendar, Heart, Sparkles } from "lucide-react";
+import { Gift, Calendar, Heart, PartyPopper, Stars } from "lucide-react";
 
 const PromocaoEspecial = () => {
   const hoje = new Date();
@@ -18,7 +18,7 @@ const PromocaoEspecial = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 via-purple-400/20 to-yellow-400/20 animate-pulse"></div>
         <CardHeader className="relative z-10">
           <CardTitle className="flex items-center gap-2 text-pink-700 text-center justify-center">
-            <Sparkles className="h-6 w-6 animate-spin" />
+            <PartyPopper className="h-6 w-6 animate-spin" />
             🎉 Sistema de Girinhas Ativo!
             <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 animate-bounce">
               Ganhe Bônus!

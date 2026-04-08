@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Heart, Star, Sparkles, LucideIcon } from 'lucide-react';
+import { Heart, Star, Coins, LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import LazyImage from '@/components/ui/lazy-image';
@@ -211,7 +211,7 @@ const UniversalCard: React.FC<UniversalCardProps> = (props) => {
 
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-1 text-primary font-bold">
-              <Sparkles className="w-4 h-4" />
+              <Coins className="w-4 h-4" />
               <span>{data.valorGirinhas}</span>
             </div>
             
@@ -364,7 +364,7 @@ const UniversalCard: React.FC<UniversalCardProps> = (props) => {
               
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-1 text-primary font-bold">
-                  <Sparkles className="w-4 h-4" />
+                  <Coins className="w-4 h-4" />
                   <span>{data.valor}</span>
                 </div>
                 <Badge variant={data.status === 'pendente' ? 'secondary' : 'default'}>

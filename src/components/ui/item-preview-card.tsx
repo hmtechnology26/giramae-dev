@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Heart, User, Sparkles } from 'lucide-react';
+import { Heart, User, Coins, ImagePlus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { buildItemImageUrl } from '@/lib/cdn';
 
@@ -78,7 +78,7 @@ const ItemPreviewCard: React.FC<ItemPreviewCardProps> = ({
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-400">
               <div className="text-center">
-                <Sparkles className="w-8 h-8 mx-auto mb-2" />
+                <ImagePlus className="w-8 h-8 mx-auto mb-2" />
                 <p className="text-sm">Adicione uma foto</p>
               </div>
             </div>
@@ -125,7 +125,7 @@ const ItemPreviewCard: React.FC<ItemPreviewCardProps> = ({
         {/* Preço */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <Sparkles className="w-4 h-4 text-yellow-500" />
+            <Coins className="w-4 h-4 text-yellow-500" />
             <span className="font-bold text-lg text-primary">
               {valorGirinhas || 0}
             </span>
