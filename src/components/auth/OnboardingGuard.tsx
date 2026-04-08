@@ -39,10 +39,15 @@ const OnboardingGuard: React.FC<OnboardingGuardProps> = ({ children }) => {
             cadastro_status
           `)
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
         if (error) {
           console.error('Erro ao verificar onboarding:', error);
+          setLoading(false);
+          return;
+        }
+
+        if (!data) {
           setLoading(false);
           return;
         }

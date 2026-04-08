@@ -54,7 +54,7 @@ const WelcomeBonusModal: React.FC = () => {
           .from('profiles')
           .select('ritual_completo, nome')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
         if (error || !profile || !isMounted) {
           return;

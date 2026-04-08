@@ -88,9 +88,10 @@ const Header = () => {
           .from('profiles')
           .select('cadastro_status')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
         if (data) setCadastroIncompleto(data.cadastro_status === 'incompleto');
+        else setCadastroIncompleto(true);
       } catch {
         setCadastroIncompleto(true);
       } finally {

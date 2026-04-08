@@ -42,11 +42,16 @@ export const useProfile = () => {
         .from('profiles')
         .select('*')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
       if (profileError) throw profileError;
 
       setProfile(profileData);
+
+      if (!profileData) {
+        setFilhos([]);
+        return;
+      }
 
       // Buscar filhos com escolas
       const { data: filhosData, error: filhosError } = await supabase
@@ -98,11 +103,18 @@ export const useProfile = () => {
         .from('profiles')
         .select('*')
         .eq('id', id)
-        .single();
+        .maybeSingle();
 
       if (profileError) {
         console.error('Erro ao buscar perfil:', profileError);
         throw profileError;
+      }
+
+      if (!profileData) {
+        setProfile(null);
+        setFilhos([]);
+        setError('Perfil não encontrado');
+        return null;
       }
 
       console.log('Perfil encontrado:', profileData);
@@ -160,11 +172,18 @@ export const useProfile = () => {
         .from('profiles')
         .select('*')
         .eq('nome', decodeURIComponent(nome))
-        .single();
+        .maybeSingle();
 
       if (profileError) {
         console.error('Erro ao buscar perfil:', profileError);
         throw profileError;
+      }
+
+      if (!profileData) {
+        setProfile(null);
+        setFilhos([]);
+        setError('Perfil não encontrado');
+        return null;
       }
 
       console.log('Perfil encontrado:', profileData);

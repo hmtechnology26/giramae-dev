@@ -67,11 +67,33 @@ export const syncPlayerIdWithDatabase = async (userId: string): Promise<boolean>
       .from('user_notification_preferences')
       .select('*')
       .eq('user_id', userId)
-      .single();
+      .maybeSingle();
     
     if (fetchError) {
       console.error('[Sync Player ID] Erro ao buscar preferências:', fetchError);
       return false;
+    }
+
+    if (!preferences) {
+      log('[Sync Player ID] Preferências não encontradas, criando registro padrão...');
+      const { error: createError } = await supabase
+        .from('user_notification_preferences')
+        .upsert({
+          user_id: userId,
+          mensagens: true,
+          reservas: true,
+          girinhas: true,
+          sistema: true,
+          push_enabled: false,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id' });
+
+      if (createError) {
+        console.error('[Sync Player ID] Erro ao criar preferências padrão:', createError);
+        return false;
+      }
+
+      return true;
     }
     
     // Verificar se precisa atualizar - safe type checking
@@ -184,4 +206,3 @@ export const useSyncPlayerIdOnLoad = (userId?: string) => {
     syncWithDelay();
   }, [userId]);
 };
-

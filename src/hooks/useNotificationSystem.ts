@@ -215,14 +215,15 @@ export const useNotificationSystem = () => {
         // Criar preferências padrão
         const { data: newPrefs, error: insertError } = await supabase
           .from('user_notification_preferences')
-          .insert({
+          .upsert({
             user_id: user.id,
             mensagens: true,
             reservas: true,
             girinhas: true,
             sistema: true,
-            push_enabled: false
-          })
+            push_enabled: false,
+            updated_at: new Date().toISOString()
+          }, { onConflict: 'user_id' })
           .select()
           .single();
 
@@ -411,7 +412,7 @@ export const useNotificationSystem = () => {
       } else {
         result = await supabase
           .from('user_notification_preferences')
-          .insert({
+          .upsert({
             user_id: user.id,
             mensagens: preferences.mensagens,
             reservas: preferences.reservas,
@@ -420,7 +421,7 @@ export const useNotificationSystem = () => {
             push_enabled: preferences.push_enabled,
             ...newPrefs,
             updated_at: new Date().toISOString()
-          });
+          }, { onConflict: 'user_id' });
       }
 
       if (result.error) {

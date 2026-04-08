@@ -50,10 +50,15 @@ const AcessoTotalGuard: React.FC<AcessoTotalGuardProps> = ({ children }) => {
             estado
           `)
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
         if (profileError) {
           console.error('Erro ao verificar perfil:', profileError);
+          setLoading(false);
+          return;
+        }
+
+        if (!profile) {
           setLoading(false);
           return;
         }

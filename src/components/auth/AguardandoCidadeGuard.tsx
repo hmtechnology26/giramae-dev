@@ -38,10 +38,15 @@ const AguardandoCidadeGuard: React.FC<AguardandoCidadeGuardProps> = ({ children 
             estado
           `)
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
         if (profileError) {
           console.error('Erro ao verificar perfil:', profileError);
+          setLoading(false);
+          return;
+        }
+
+        if (!profile) {
           setLoading(false);
           return;
         }
@@ -65,7 +70,7 @@ const AguardandoCidadeGuard: React.FC<AguardandoCidadeGuardProps> = ({ children 
             .select('liberada')
             .eq('cidade', profile.cidade)
             .eq('estado', profile.estado)
-            .single();
+            .maybeSingle();
 
           if (!cidadeError && cidadeConfig) {
             cidadeLiberada = cidadeConfig.liberada;
