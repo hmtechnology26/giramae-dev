@@ -1,60 +1,106 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { 
-  Users, 
-  Gift, 
-  Share2, 
-  TrendingUp, 
-  Calendar,
-  Trophy,
-  Copy,
-  CheckCircle
-} from 'lucide-react';
-import { useIndicacoes } from '@/hooks/useIndicacoes';
-import { useTiposTransacao } from '@/hooks/useTiposTransacao';
-import LoadingSpinner from '@/components/loading/LoadingSpinner';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import {
+  BadgeCheck,
+  CheckCircle,
+  Gift,
+  Share2,
+  Shirt,
+  Trophy,
+  TrendingUp,
+  Users,
+  Link,
+  Wallet,
+} from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import LoadingSpinner from '@/components/loading/LoadingSpinner';
+import { useIndicacoes } from '@/hooks/useIndicacoes';
+import { useTiposTransacao } from '@/hooks/useTiposTransacao';
 import { toast } from 'sonner';
 
-const PaginaIndicacoes = () => {
-  const { 
-    indicacoes, 
-    indicados, 
-    loading, 
-    error, 
-    compartilharIndicacao,
-    obterEstatisticas 
-  } = useIndicacoes();
+const parseBonus = (value: unknown, fallback: number) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+};
 
+const InfoPill = ({
+  label,
+  value,
+  icon: Icon,
+}: {
+  label: string;
+  value: string | number;
+  icon: React.ComponentType<{ className?: string }>;
+}) => (
+  <div className="flex items-center gap-3 rounded-[1.25rem] border border-white/80 bg-white/80 px-4 py-3 shadow-[0_18px_45px_-30px_rgba(17,24,39,0.18)]">
+    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-pink-100 text-pink-700">
+      <Icon className="h-5 w-5" />
+    </div>
+    <div>
+      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/45">
+        {label}
+      </p>
+      <p className="text-lg font-black text-foreground">{value}</p>
+    </div>
+  </div>
+);
+
+const PaginaIndicacoes = () => {
+  const {
+    indicacoes,
+    indicados,
+    loading,
+    error,
+    compartilharIndicacao,
+    obterEstatisticas,
+  } = useIndicacoes();
   const { obterConfigTipo } = useTiposTransacao();
   const [estatisticas, setEstatisticas] = React.useState<any>(null);
 
   React.useEffect(() => {
-    const carregarEstatisticas = async () => {
+    const carregar = async () => {
       const stats = await obterEstatisticas();
       setEstatisticas(stats);
     };
-    carregarEstatisticas();
+    carregar();
   }, [obterEstatisticas]);
+
+  const bonusCadastroIndicacao = parseBonus(
+    obterConfigTipo('bonus_indicacao_cadastro')?.valor_padrao,
+    10,
+  );
+  const bonusPrimeiroItem = parseBonus(
+    obterConfigTipo('bonus_indicacao_primeiro_item')?.valor_padrao,
+    10,
+  );
+  const bonusPrimeiraCompra = parseBonus(
+    obterConfigTipo('bonus_indicacao_primeira_compra')?.valor_padrao,
+    30,
+  );
+  const bonusCadastroIndicado = parseBonus(
+    obterConfigTipo('bonus_indicacao_cadastro_indicado')?.valor_padrao,
+    25,
+  );
+  const totalPossivel = bonusCadastroIndicacao + bonusPrimeiroItem + bonusPrimeiraCompra;
 
   const handleCompartilhar = async () => {
     try {
       await compartilharIndicacao();
-      toast.success('Link de indicação copiado!', {
-        description: 'Compartilhe com suas amigas para ganharem bônus juntas!'
+      toast.success('Link copiado!', {
+        description: 'Agora é só enviar para as amigas.',
       });
-    } catch (error) {
-      toast.error('Erro ao compartilhar link');
+    } catch {
+      toast.error('Não foi possível copiar o link');
     }
   };
 
   if (loading) {
     return (
-      <div className="w-full flex items-center justify-center py-20">
+      <div className="flex w-full items-center justify-center py-20">
         <LoadingSpinner size="xl" text="Carregando indicações..." />
       </div>
     );
@@ -62,277 +108,198 @@ const PaginaIndicacoes = () => {
 
   if (error) {
     return (
-      <Card className="premium-card rounded-[2.5rem] border border-red-500/20 bg-red-50/40">
-        <CardContent className="pt-6">
-          <p className="text-red-600 text-center font-medium">{error}</p>
+      <Card className="rounded-[2rem] border border-red-200 bg-red-50/70">
+        <CardContent className="py-8">
+          <p className="text-center font-medium text-red-600">{error}</p>
         </CardContent>
       </Card>
     );
   }
 
   return (
-    <div className="w-full space-y-6">
-
-      {/* Como funciona o sistema de indicações */}
-      <Card className="premium-card rounded-[2.5rem] border border-white/60 bg-gradient-to-br from-purple-50/60 via-pink-50/50 to-orange-50/50 shadow-xl">
-        <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-3 text-foreground font-black tracking-tight">
-            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-              <Gift className="w-6 h-6 text-primary" />
-            </div>
-            <span>Mãe, vem ver que vantagem! 💜</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            {/* Para você que indica */}
-            <div className="premium-card bg-white/60 border border-purple-200/40 rounded-[2rem] p-6">
-              <h3 className="font-black text-purple-700 mb-4 flex items-center gap-2 text-[11px] uppercase tracking-widest">
-                <Users className="w-5 h-5" />
-                Para você que indica:
-              </h3>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="text-2xl">👥</div>
-                  <div>
-                    <p className="font-medium text-gray-800">
-                      +{obterConfigTipo('bonus_indicacao_cadastro')?.valor_padrao || 10} Girinhas
-                    </p>
-                    <p className="text-sm text-gray-600">quando ela se cadastrar</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="text-2xl">📦</div>
-                  <div>
-                    <p className="font-medium text-gray-800">
-                      +{obterConfigTipo('bonus_indicacao_primeiro_item')?.valor_padrao || 10} Girinhas
-                    </p>
-                    <p className="text-sm text-gray-600">quando ela publicar o primeiro item</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="text-2xl">🛍️</div>
-                  <div>
-                    <p className="font-medium text-gray-800">
-                      +{obterConfigTipo('bonus_indicacao_primeira_compra')?.valor_padrao || 30} Girinhas
-                    </p>
-                    <p className="text-sm text-gray-600">quando ela fizer a primeira compra</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-5 px-4 py-3 bg-purple-50/60 border border-purple-200/40 rounded-2xl">
-                <p className="text-sm font-medium text-purple-700">
-                  Total possível: até {
-                    (parseFloat(String(obterConfigTipo('bonus_indicacao_cadastro')?.valor_padrao || '10')) +
-                     parseFloat(String(obterConfigTipo('bonus_indicacao_primeiro_item')?.valor_padrao || '10')) +
-                     parseFloat(String(obterConfigTipo('bonus_indicacao_primeira_compra')?.valor_padrao || '30'))).toFixed(0)
-                  } Girinhas por amiga!
-                </p>
-              </div>
+    <div className="space-y-5">
+      <section className="overflow-hidden rounded-[2.25rem] border border-white/80 bg-[linear-gradient(135deg,rgba(251,113,133,0.14),rgba(255,255,255,0.92),rgba(251,191,36,0.12))] shadow-[0_28px_70px_-34px_rgba(244,63,94,0.28)]">
+        <div className="grid gap-5 px-5 py-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-7 lg:py-7">
+          <div className="space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge className="rounded-full bg-pink-100 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-pink-700">
+                Indique e ganhe
+              </Badge>
+              <Badge className="rounded-full bg-amber-100 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-amber-800">
+                3 etapas
+              </Badge>
             </div>
 
-            {/* Para sua amiga */}
-            <div className="premium-card bg-white/60 border border-pink-200/40 rounded-[2rem] p-6">
-              <h3 className="font-black text-pink-700 mb-4 flex items-center gap-2 text-[11px] uppercase tracking-widest">
-                <Gift className="w-5 h-5" />
-                Para sua amiga:
-              </h3>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="text-2xl">🎁</div>
-                  <div>
-                    <p className="font-medium text-gray-800">
-                      +{obterConfigTipo('bonus_indicacao_cadastro_indicado')?.valor_padrao || 25} Girinhas
-                    </p>
-                    <p className="text-sm text-gray-600">de boas-vindas no cadastro</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="text-2xl">💝</div>
-                  <div>
-                    <p className="font-medium text-gray-800">Entrada VIP</p>
-                    <p className="text-sm text-gray-600">direto na comunidade mais querida das mães</p>
-                  </div>
-                </div>
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-[11px] font-bold text-foreground/70 shadow-sm">
+                <Link className="h-3.5 w-3.5 text-pink-500" />
+                Um link, três momentos de bônus
               </div>
+              <h1 className="text-3xl font-black leading-tight tracking-tight text-foreground sm:text-4xl">
+                Compartilhe seu link e acompanhe os ganhos.
+              </h1>
+              <p className="max-w-xl text-sm leading-relaxed text-foreground/65 sm:text-base">
+                Sua amiga entra pelo seu link e já recebe bônus.
+                Você também ganha Girinhas quando ela concluir o cadastro, publicar o primeiro item e fizer a primeira compra.
+              </p>
+              <p className="text-sm font-semibold text-foreground/70">
+                No cadastro, ela já começa com +{bonusCadastroIndicado} Girinhas.
+              </p>
+            </div>
 
-              <div className="mt-5 px-4 py-3 bg-pink-50/60 border border-pink-200/40 rounded-2xl">
-                <p className="text-sm font-medium text-pink-700">
-                  Ela já começa com {obterConfigTipo('bonus_indicacao_cadastro_indicado')?.valor_padrao || 25} Girinhas! 💖
-                </p>
-              </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button
+                onClick={handleCompartilhar}
+                className="h-12 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-600 to-amber-500 px-5 font-bold text-white shadow-[0_18px_35px_-14px_rgba(244,63,94,0.55)] hover:from-pink-500 hover:via-rose-500 hover:to-amber-400"
+              >
+                <Share2 className="mr-2 h-4 w-4" />
+                Copiar link
+              </Button>
+              <Button
+                variant="outline"
+                className="h-12 rounded-2xl border-white/80 bg-white/75 px-5 font-bold text-foreground/80 hover:bg-white"
+                onClick={() => window.scrollTo({ top: 9999, behavior: 'smooth' })}
+              >
+                Ver minhas indicações
+              </Button>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              <InfoPill label="Cadastro" value={`+${bonusCadastroIndicacao}`} icon={Gift} />
+              <InfoPill label="Primeiro item" value={`+${bonusPrimeiroItem}`} icon={Shirt} />
+              <InfoPill label="Primeira compra" value={`+${bonusPrimeiraCompra}`} icon={Trophy} />
             </div>
           </div>
 
-          <div className="premium-card mt-2 p-6 bg-gradient-to-r from-yellow-50/70 to-orange-50/60 rounded-[2rem] border border-white/60">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="text-2xl">✨</div>
-              <p className="font-semibold text-orange-800">Dica de mãe experiente:</p>
-            </div>
-            <p className="text-orange-700">
-              Quanto mais amigas você indicar, mais Girinhas você ganha!
-              Compartilha nos grupos das mães, no WhatsApp da escola...
-            </p>
+          <div className="grid gap-3">
+            <Card className="border-white/80 bg-white/85 shadow-[0_22px_60px_-30px_rgba(244,63,94,0.22)]">
+              <CardContent className="p-5">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-pink-500 via-rose-500 to-amber-400 text-white">
+                    <Wallet className="h-7 w-7" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-black uppercase tracking-[0.24em] text-pink-600">
+                      Ganho máximo
+                    </p>
+                    <p className="mt-1 text-3xl font-black tracking-tight text-foreground">
+                      +{totalPossivel} G$
+                    </p>
+                    <p className="text-sm text-foreground/60">
+                      Se ela concluir as 3 etapas, esse é o total que você pode receber.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 rounded-[1.25rem] bg-pink-50 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pink-700">
+                    Conversão
+                  </p>
+                  <p className="mt-1 text-2xl font-black text-foreground">
+                    1 G$ = R$ 1,00
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-emerald-100 bg-emerald-50/90">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+                    <BadgeCheck className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-black text-emerald-900">
+                      Resumo rápido
+                    </p>
+                    <p className="text-sm text-emerald-900/70">
+                      Você já gerou {estatisticas?.totalBonusRecebido ?? 0} Girinhas em bônus.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Estatísticas */}
-      {estatisticas && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="premium-card rounded-[2rem] border border-white/60 bg-white/40">
-            <CardContent className="pt-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 shrink-0">
-                  <Users className="w-6 h-6" />
-                </div>
-                <div className="ml-4">
-                  <p className="text-2xl font-bold">{estatisticas.totalIndicacoes}</p>
-                  <p className="text-gray-600 text-sm">Indicações Feitas</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="premium-card rounded-[2rem] border border-white/60 bg-white/40">
-            <CardContent className="pt-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0">
-                  <Gift className="w-6 h-6" />
-                </div>
-                <div className="ml-4">
-                  <p className="text-2xl font-bold">{estatisticas.totalBonusRecebido}</p>
-                  <p className="text-gray-600 text-sm">Girinhas Ganhas</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="premium-card rounded-[2rem] border border-white/60 bg-white/40">
-            <CardContent className="pt-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
-                  <CheckCircle className="w-6 h-6" />
-                </div>
-                <div className="ml-4">
-                  <p className="text-2xl font-bold">{estatisticas.bonusCadastro}</p>
-                  <p className="text-gray-600 text-sm">Cadastros</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="premium-card rounded-[2rem] border border-white/60 bg-white/40">
-            <CardContent className="pt-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center text-yellow-600 shrink-0">
-                  <Trophy className="w-6 h-6" />
-                </div>
-                <div className="ml-4">
-                  <p className="text-2xl font-bold">{estatisticas.bonusPrimeiraCompra}</p>
-                  <p className="text-gray-600 text-sm">Primeiras Compras</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
-      )}
+      </section>
 
-      {/* Compartilhar Link */}
-      <Card className="premium-card rounded-[2.5rem] border border-white/60 bg-gradient-to-r from-purple-50/60 to-pink-50/60">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-3 font-black tracking-tight text-foreground">
-            <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-              <Share2 className="w-5 h-5 text-primary" />
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <InfoPill label="Indicações" value={estatisticas?.totalIndicacoes ?? 0} icon={Users} />
+        <InfoPill label="Girinhas pagas" value={estatisticas?.totalBonusRecebido ?? 0} icon={Gift} />
+        <InfoPill label="Cadastros" value={estatisticas?.bonusCadastro ?? 0} icon={CheckCircle} />
+        <InfoPill label="Primeiras compras" value={estatisticas?.bonusPrimeiraCompra ?? 0} icon={Trophy} />
+      </div>
+
+      <Card className="overflow-hidden border-white/80 bg-white/85 shadow-[0_24px_70px_-34px_rgba(17,24,39,0.18)]">
+        <CardContent className="space-y-4 p-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-200 text-emerald-700">
+              <TrendingUp className="h-5 w-5" />
             </div>
-            <span>Compartilhar Link de Indicação</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-foreground/60 font-medium mb-4">
-            Compartilhe seu link de indicação e ganhe bônus quando suas amigas se juntarem ao GiraMãe!
-          </p>
-          <Button onClick={handleCompartilhar} className="founders-button w-full md:w-auto px-8 h-12 text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-lg shadow-primary/20">
-            <Copy className="w-4 h-4 mr-2" />
-            Compartilhar Link
-          </Button>
-        </CardContent>
-      </Card>
-
-      {/* Minhas Indicações */}
-      <Card className="premium-card rounded-[2.5rem] border border-white/60 bg-white/40">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-3 font-black tracking-tight text-foreground">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-50 flex items-center justify-center shrink-0 text-emerald-600">
-              <TrendingUp className="w-5 h-5" />
+            <div>
+              <h2 className="text-lg font-black tracking-tight text-foreground">
+                Minhas indicações
+              </h2>
+              <p className="text-sm text-foreground/55">
+                Lista de amigas que entraram pelo seu link.
+              </p>
             </div>
-            Minhas Indicações ({indicacoes.length})
-          </CardTitle>
-        </CardHeader>
+          </div>
 
-        <CardContent>
           {indicacoes.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">
-              <Users className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-              <p className="text-lg font-medium mb-2">Nenhuma indicação ainda</p>
-              <p>Compartilhe seu link para começar a indicar amigas!</p>
+            <div className="rounded-[1.5rem] border border-dashed border-foreground/10 bg-foreground/[0.02] px-6 py-8 text-center">
+              <Users className="mx-auto h-10 w-10 text-foreground/20" />
+              <p className="mt-3 text-base font-bold text-foreground">
+                Você ainda não indicou ninguém
+              </p>
+              <p className="mt-1 text-sm text-foreground/55">
+                Copie o link e comece a gerar bônus.
+              </p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3">
               {indicacoes.map((indicacao) => (
-                <div 
-                  key={indicacao.id} 
-                  className="premium-card bg-white/40 border border-white/60 rounded-[2rem] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                <div
+                  key={indicacao.id}
+                  className="flex items-center justify-between gap-3 rounded-[1.25rem] border border-white/80 bg-white/80 p-4"
                 >
-                  {/* Avatar + Nome */}
-                  <div className="flex items-center gap-3">
-                    <Avatar>
-                      <AvatarImage src={indicacao.profiles?.avatar_url || ''} />
-                      <AvatarFallback>
+                  <div className="flex min-w-0 items-center gap-3">
+                    <Avatar className="h-11 w-11">
+                      <AvatarImage src={indicacao.profiles?.avatar_url || undefined} />
+                      <AvatarFallback className="bg-pink-100 text-pink-700">
                         {indicacao.profiles?.nome?.charAt(0) || '?'}
                       </AvatarFallback>
                     </Avatar>
-                    <div>
-                      <p className="font-medium">{indicacao.profiles?.nome || 'Usuário'}</p>
-                      <p className="text-sm text-gray-600">
-                        Indicado em {format(new Date(indicacao.created_at), 'dd/MM/yyyy', { locale: ptBR })}
+                    <div className="min-w-0">
+                      <p className="font-bold text-foreground">
+                        {indicacao.profiles?.nome || 'Usuária'}
+                      </p>
+                      <p className="text-sm text-foreground/55">
+                        Entrou em{' '}
+                        {format(new Date(indicacao.created_at), 'dd/MM/yyyy', {
+                          locale: ptBR,
+                        })}
                       </p>
                     </div>
                   </div>
 
-                  {/* Badges (AQUI É A MODIFICAÇÃO) */}
-                  <div className="flex flex-col items-start gap-1">
-                      {indicacao.bonus_cadastro_pago && (
-                        <Badge 
-                          variant="default" 
-                          className="w-fit text-[11px] px-2 py-1 flex items-center gap-1">
-                          Cadastro<span>✓</span>
-                        </Badge>
-                      )}
-                    
-                      {indicacao.bonus_primeiro_item_pago && (
-                        <Badge 
-                          variant="secondary" 
-                          className="w-fit text-[11px] px-2 py-1 flex items-center gap-1">
-                          1º Item<span>✓</span>
-                        </Badge>
-                      )}
-                    
-                      {indicacao.bonus_primeira_compra_pago && (
-                        <Badge 
-                          variant="outline" 
-                          className="w-fit text-[11px] px-2 py-1 flex items-center gap-1">
-                          1ª Compra<span>✓</span>
-                        </Badge>
-                      )}
-                    </div>
-
+                  <div className="flex flex-wrap justify-end gap-2">
+                    {indicacao.bonus_cadastro_pago && (
+                      <Badge className="rounded-full bg-emerald-100 px-3 py-1 text-emerald-700 hover:bg-emerald-100">
+                        Cadastro
+                      </Badge>
+                    )}
+                    {indicacao.bonus_primeiro_item_pago && (
+                      <Badge className="rounded-full bg-blue-100 px-3 py-1 text-blue-700 hover:bg-blue-100">
+                        Item
+                      </Badge>
+                    )}
+                    {indicacao.bonus_primeira_compra_pago && (
+                      <Badge className="rounded-full bg-amber-100 px-3 py-1 text-amber-700 hover:bg-amber-100">
+                        Compra
+                      </Badge>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -340,41 +307,27 @@ const PaginaIndicacoes = () => {
         </CardContent>
       </Card>
 
-      {/* Quem me indicou */}
       {indicados.length > 0 && (
-        <Card className="premium-card rounded-[2.5rem] border border-white/60 bg-white/40">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 font-black tracking-tight text-foreground">
-              <div className="w-10 h-10 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0 text-blue-600">
-                <Calendar className="w-5 h-5" />
+        <Card className="overflow-hidden border-white/80 bg-white/85 shadow-[0_24px_70px_-34px_rgba(59,130,246,0.14)]">
+          <CardContent className="p-5">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
+                <BadgeCheck className="h-5 w-5" />
               </div>
-              Quem me indicou
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            <div className="space-y-4">
-              {indicados.map((indicacao) => (
-                <div key={indicacao.id} className="premium-card bg-white/40 border border-white/60 rounded-[2rem] p-5 flex items-center gap-3">
-                  <Avatar>
-                    <AvatarImage src={indicacao.profiles?.avatar_url || ''} />
-                    <AvatarFallback>
-                      {indicacao.profiles?.nome?.charAt(0) || '?'}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-medium">{indicacao.profiles?.nome || 'Usuário'}</p>
-                    <p className="text-sm text-gray-600">
-                      Te indicou em {format(new Date(indicacao.created_at), 'dd/MM/yyyy', { locale: ptBR })}
-                    </p>
-                  </div>
-                </div>
-              ))}
+              <div>
+                <p className="text-sm font-black text-foreground">
+                  Quem me indicou
+                </p>
+                <p className="text-sm text-foreground/55">
+                  {indicados.length > 0
+                    ? `${indicados[0].profiles?.nome || 'Uma amiga'} te trouxe para o GiraMãe.`
+                    : 'Nenhuma informação disponível.'}
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
       )}
-
     </div>
   );
 };

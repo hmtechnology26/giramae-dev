@@ -9,9 +9,9 @@ const SaldoHeader: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 text-pink-50 rounded-full">
+      <div className="flex items-center gap-2 px-3 md:px-4 py-1 text-pink-50 rounded-full min-w-[110px]">
         <Wallet className="w-4 h-4 text-pink-600" />
-        <Skeleton className="h-5 w-16" />
+        <Skeleton className="h-4 w-16" />
       </div>
     );
   }
@@ -20,18 +20,20 @@ const SaldoHeader: React.FC = () => {
     <Link 
       to="/carteira" 
       data-tour="wallet-button"
-      className="flex justify-center items-center gap-2 px-2 md:px-4 ml-0 md:ml-5 py-2 md:py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full transition-all group"
+      className="flex items-center gap-2 px-4 md:px-6 ml-0 md:ml-5 py-1.5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full transition-all group min-w-[130px]"
       title="Ver Carteira Completa"
     >
       <img 
-    src="/girinha_sem_fundo.png" 
-    alt="Girinha" 
-    className="w-5 h-6 md:w-6 md:h-7 object-contain group-hover:animate-pulse"
-  />
+        src="/girinha_sem_fundo.png" 
+        alt="Girinha" 
+        className="w-4 h-5 md:w-5 md:h-6 object-contain group-hover:animate-pulse"
+      />
       
-      <div className="flex flex-col">
-        <span className="text-[10px] md:text-xs text-gray-500 font-bold leading-none">G$</span>
-        <span className="text-xs md:text-sm font-bold text-pink-700 leading-tight">
+      <div className="flex flex-col leading-tight">
+        <span className="text-[9px] md:text-[10px] text-gray-500 font-bold">
+          G$
+        </span>
+        <span className="text-xs md:text-sm font-bold text-pink-700">
           {saldo.toFixed(2)}
         </span>
       </div>

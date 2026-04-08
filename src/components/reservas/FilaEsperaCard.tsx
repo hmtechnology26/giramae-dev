@@ -78,7 +78,7 @@ const FilaEsperaCard = ({ fila, onSairDaFila }: FilaEsperaCardProps) => {
           variant="destructive" 
           size="sm" 
           onClick={() => onSairDaFila(fila.item_id)}
-          className="w-full"
+          className="w-full text-xs sm:text-sm"
         >
           <X className="w-4 h-4 mr-1" />
           Sair da fila

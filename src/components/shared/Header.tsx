@@ -28,12 +28,12 @@ const NavLink = ({ to, icon: Icon, children }) => {
     <Link
       to={to}
       className={cn(
-        "flex items-center gap-1.5 transition-all duration-300",
+        "flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-all duration-300",
         isActive ? "text-primary font-bold" : "text-foreground/60 hover:text-primary"
       )}
     >
       <Icon className={cn("w-3.5 h-3.5", isActive && "text-glow")} />
-      <span className="text-[12px] tracking-tight">{children}</span>
+      <span className="text-[12px] tracking-tight whitespace-nowrap">{children}</span>
     </Link>
   );
 };
@@ -43,8 +43,8 @@ const NavLink = ({ to, icon: Icon, children }) => {
 
 const DesktopNav = () => {
   return (
-    <nav className="flex items-center mx-2">
-      <div className="flex gap-4 items-center">
+    <nav className="flex items-center mx-2 shrink-0">
+      <div className="flex items-center gap-2 lg:gap-2.5 whitespace-nowrap flex-nowrap shrink-0">
         <NavLink to="/feed" icon={Home}>Feed</NavLink>
         <NavLink to="/publicar" icon={Plus}>Publicar</NavLink>
         <NavLink to="/minhas-reservas" icon={Package}>Reservas</NavLink>
@@ -165,27 +165,29 @@ const Header = () => {
       <header className="fixed top-1 left-3 right-3 md:left-6 md:right-6 z-40 rounded-full mx-auto max-w-7xl transition-all duration-500">
         <div className="bg-white/70 backdrop-blur-3xl border border-white/90 rounded-full px-4 md:px-8 shadow-[0_32px_64px_-16px_rgba(235,51,148,0.12)]">
           <div className="w-full max-w-7xl mx-auto">
-            <div className="flex justify-between items-center h-20">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center h-20 gap-3">
               {/* -------------- LOGO -------------- */}
-              <Link to="/feed" className="flex items-center transition-all duration-500 active:scale-95 group">
-                <img src="/giramae_logo.png" alt="Logo" className="h-[48px] md:h-[60px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
+              <Link to="/feed" className="flex items-center transition-all duration-500 active:scale-95 group shrink-0 pr-2">
+                <img src="/giramae_logo.png" alt="Logo" className="h-[48px] md:h-[54px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
               </Link>
 
               {/* -------------- MENU CENTRAL -------------- */}
               {!shouldHideMenus && (
-                <div className="hidden md:flex items-center text-start justify-center flex-1 gap-4 ml-10">
-                  <DesktopNav />
-                  <div className=" mx-4 w-[120px] lg:w-[160px] ">
+                <div className="hidden md:flex items-center justify-end min-w-0 gap-2 lg:gap-3 justify-self-end">
+                  <div className="min-w-0 overflow-hidden">
+                    <DesktopNav />
+                  </div>
+                  <div className="w-[110px] lg:w-[125px] xl:w-[145px] 2xl:w-[170px] shrink-0">
                     <UserSearch
                       onSelectUser={(userId) => navigate(`/perfil/${userId}`)}
-                      placeholder="Buscar mães..." className=" placeholder:text-[9px] text-[9px]"
+                      placeholder="Buscar mães..." className=" placeholder:text-[9px] text-[9px] -mr-4"
                     />
                   </div>
                 </div>
               )}
 
               {/* -------------- LADO DIREITO -------------- */}
-              <div className="hidden md:flex items-center space-x-4">
+              <div className="hidden md:flex items-center space-x-3 xl:space-x-4 shrink-0 justify-self-end pl-2">
                 {!shouldHideMenus && <SaldoHeader />}
                 {!shouldHideMenus && <div className="scale-90"><NotificationBell /></div>}
 
@@ -254,7 +256,7 @@ const Header = () => {
       {mobileMenuOpen && !shouldHideMenus && (
         <div className="md:hidden fixed inset-0 z-50 bg-background/50 backdrop-blur-sm transition-all"
           onClick={() => setMobileMenuOpen(false)}>
-          <div className="fixed right-4 top-20 bottom-24 w-72 glass-dark rounded-3xl shadow-xl overflow-hidden border border-primary/10 flex flex-col"
+          <div className="fixed right-4 left-4 top-20 bottom-24 w-auto max-w-[calc(100vw-2rem)] glass-dark rounded-3xl shadow-xl overflow-hidden border border-primary/10 flex flex-col sm:left-auto sm:w-72 sm:max-w-none"
             onClick={e => e.stopPropagation()}>
             <div className="p-6 border-b border-primary/5 flex items-center gap-4 bg-primary/5">
               {profile?.avatar_url && !avatarLoadError ? (

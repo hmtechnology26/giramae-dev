@@ -360,13 +360,13 @@ const ReservaCard = ({
         </CardContent>
 
         <CardFooter className="pt-3 bg-gray-50/50">
-          <div className="flex items-center gap-2 w-full min-w-0">
+          <div className="grid grid-cols-2 gap-2 w-full min-w-0 sm:flex sm:items-center">
             {onVerDetalhes && (
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleVerDetalhes}
-                className="shrink-0 px-2"
+                className="w-full shrink-0 px-2 sm:w-auto"
               >
                 <Eye className="w-4 h-4" />
               </Button>
@@ -378,7 +378,7 @@ const ReservaCard = ({
                   <Button
                     size="sm"
                     onClick={handleWhatsAppClick}
-                    className="flex-1 min-w-0 bg-green-500 hover:bg-green-600 text-white"
+                    className="w-full min-w-0 bg-green-500 hover:bg-green-600 text-white sm:flex-1"
                   >
                     <MessageCircle className="w-4 h-4 mr-1 shrink-0" />
                     <span className="truncate">WhatsApp</span>
@@ -388,7 +388,7 @@ const ReservaCard = ({
                 <Button
                   size="sm"
                   onClick={() => setShowCodigoModal(true)}
-                  className="shrink-0 px-3 bg-blue-600 hover:bg-blue-700"
+                  className="w-full shrink-0 px-3 bg-blue-600 hover:bg-blue-700 sm:w-auto"
                 >
                   <Key className="w-4 h-4 mr-1" />
                   <span className="hidden lg:inline">
@@ -400,7 +400,7 @@ const ReservaCard = ({
                   size="sm"
                   variant="outline"
                   onClick={() => setShowCancelarModal(true)}
-                  className="shrink-0 px-2 border-red-200 text-red-600 hover:bg-red-50"
+                  className="w-full shrink-0 px-2 border-red-200 text-red-600 hover:bg-red-50 sm:w-auto"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -411,7 +411,7 @@ const ReservaCard = ({
               <Button
                 size="sm"
                 onClick={() => setShowAvaliacao(true)}
-                className="flex-1 min-w-0 bg-purple-600 hover:bg-purple-700"
+                className="w-full min-w-0 bg-purple-600 hover:bg-purple-700 sm:flex-1"
               >
                 <Star className="w-4 h-4 mr-1 shrink-0" />
                 <span className="truncate">Avaliar</span>

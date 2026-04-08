@@ -167,22 +167,22 @@ const MinhasReservas = () => {
       <SEOHead title={pageTitle.reservas()} />
       <Header />
 
-      <main className="container flex flex-col items-center justify-center mx-auto pt-32 pb-24 px-4 max-w-6xl">
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-black text-foreground tracking-tight">
+      <main className="container flex flex-col items-center justify-center mx-auto pt-24 pb-20 px-3 sm:px-4 md:pt-32 md:pb-24 max-w-6xl">
+        <div className="mb-8 sm:mb-12 w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground tracking-tight">
             Minhas{" "}
             <span className="text-glow text-primary italic">Reservas</span>
           </h1>
-          <p className="text-foreground/40 font-bold ml-8 uppercase tracking-widest text-[10px] mt-2">
+          <p className="text-foreground/40 font-bold ml-0 sm:ml-8 uppercase tracking-widest text-[10px] mt-2">
             Acompanhe suas trocas e vendas em tempo real
           </p>
         </div>
 
         {/* ✅ BUSCA E ESTATÍSTICAS */}
-        <div className="grid lg:grid-cols-12 gap-8 mb-12">
+        <div className="grid lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 mb-10 sm:mb-12 w-full">
           <div className="lg:col-span-12">
-            <div className="premium-card bg-white/70 backdrop-blur-2xl border-black/20 rounded-[3.5rem] p-10 shadow-[0_32px_64px_-16px_rgba(235,51,148,0.1)]">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="premium-card bg-white/70 backdrop-blur-2xl border-black/20 rounded-[2rem] sm:rounded-[3rem] lg:rounded-[3.5rem] p-4 sm:p-6 lg:p-10 shadow-[0_32px_64px_-16px_rgba(235,51,148,0.1)]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
                 {stats.map((stat) => (
                   <button
                     key={stat.filtro}
@@ -192,26 +192,26 @@ const MinhasReservas = () => {
                       )
                     }
                     className={cn(
-                      "group relative p-8 rounded-[2.5rem] border transition-all duration-500 text-left overflow-hidden",
+                      "group relative p-4 sm:p-6 lg:p-8 rounded-[1.75rem] sm:rounded-[2.5rem] border transition-all duration-500 text-left overflow-hidden",
                       filtroStatus === stat.filtro
-                        ? "bg-white border-primary/20 shadow-2xl scale-105 z-10"
+                        ? "bg-white border-primary/20 shadow-2xl scale-[1.01] sm:scale-105 z-10"
                         : "bg-white/40 border-black/10 hover:bg-white/60 hover:shadow-lg",
                     )}
                   >
                     <div
                       className={cn(
-                        "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 shadow-inner",
+                      "w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transition-all duration-500 shadow-inner",
                         stat.bg,
                         stat.color,
                         filtroStatus === stat.filtro
-                          ? "scale-110 rotate-3 shadow-lg"
-                          : "group-hover:scale-110",
+                        ? "scale-105 sm:scale-110 rotate-3 shadow-lg"
+                        : "group-hover:scale-110",
                       )}
                     >
                       <stat.icon className="w-7 h-7" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-4xl font-black text-foreground tracking-tighter drop-shadow-sm font-sans">
+                      <p className="text-3xl sm:text-4xl font-black text-foreground tracking-tighter drop-shadow-sm font-sans">
                         {stat.value}
                       </p>
                       <p className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none">
@@ -228,9 +228,9 @@ const MinhasReservas = () => {
                 ))}
               </div>
 
-              <div className="mt-10 ml-24 pt-10 border-t border-primary/5">
+              <div className="mt-8 sm:mt-10 ml-0 sm:ml-24 pt-8 sm:pt-10 border-t border-primary/5">
                 <div className="relative group max-w-2xl">
-                  <div className="absolute inset-y-0 left-7 flex items-center pointer-events-none text-primary/90 font-black text-xs tracking-widest">
+                  <div className="absolute inset-y-0 left-4 sm:left-7 flex items-center pointer-events-none text-primary/90 font-black text-[10px] sm:text-xs tracking-widest">
                     GRM-
                   </div>
                   <input
@@ -241,22 +241,22 @@ const MinhasReservas = () => {
                       setCodigoBusca(e.target.value.toUpperCase())
                     }
                     maxLength={5}
-                    className="w-full pl-24 pr-14 py-6 bg-white/40 border-primary/5 focus:border-primary/20 focus:ring-primary/5 rounded-[2rem] font-sans font-black uppercase tracking-[0.1em] text-sm transition-all placeholder:text-foreground/20 placeholder:font-bold"
+                    className="w-full pl-20 sm:pl-24 pr-12 sm:pr-14 py-4 sm:py-6 bg-white/40 border-primary/5 focus:border-primary/20 focus:ring-primary/5 rounded-[1.5rem] sm:rounded-[2rem] font-sans font-black uppercase tracking-[0.1em] text-sm transition-all placeholder:text-foreground/20 placeholder:font-bold"
                   />
                   {codigoBusca ? (
                     <button
                       onClick={() => setCodigoBusca("")}
-                      className="absolute inset-y-0 right-6 flex items-center text-primary/40 hover:text-primary transition-colors p-2"
+                      className="absolute inset-y-0 right-3 sm:right-6 flex items-center text-primary/40 hover:text-primary transition-colors p-2"
                     >
                       <X className="w-5 h-5" />
                     </button>
                   ) : (
-                    <div className="absolute inset-y-0 right-7 flex items-center text-primary/10">
+                    <div className="absolute inset-y-0 right-4 sm:right-7 flex items-center text-primary/10">
                       <Search className="w-6 h-6" />
                     </div>
                   )}
                 </div>
-                <div className="flex items-center gap-2 mt-4 ml-6">
+                <div className="flex items-center gap-2 mt-3 sm:mt-4 ml-1 sm:ml-6">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
                   <p className="text-[9px] font-black text-foreground/20 uppercase tracking-[0.2em]">
                     O código único de 5 dígitos está na página do produto
@@ -280,7 +280,7 @@ const MinhasReservas = () => {
                 </h3>
               </div>
 
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {getReservasFiltradas().map((reserva) => (
                   <ReservaCard
                     key={reserva.id}
@@ -314,7 +314,7 @@ const MinhasReservas = () => {
             </div>
           ) : filtroStatus !== "todas" ? (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {filtroStatus === "fila"
                   ? getFilasFiltradas().map((fila) => (
                       <FilaEsperaCard
@@ -353,7 +353,7 @@ const MinhasReservas = () => {
                       {minhasReservasAtivas.length}
                     </Badge>
                   </div>
-                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {minhasReservasAtivas.map((reserva) => (
                       <ReservaCard
                         key={reserva.id}
@@ -383,7 +383,7 @@ const MinhasReservas = () => {
                       {filasEspera.length}
                     </Badge>
                   </div>
-                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {filasEspera.map((fila) => (
                       <FilaEsperaCard
                         key={fila.id}
@@ -408,7 +408,7 @@ const MinhasReservas = () => {
                       {meusItensReservados.length}
                     </Badge>
                   </div>
-                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {meusItensReservados.map((reserva) => (
                       <ReservaCard
                         key={reserva.id}
@@ -439,7 +439,7 @@ const MinhasReservas = () => {
                       {reservasConcluidas.length}
                     </Badge>
                   </div>
-                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {reservasConcluidas.slice(0, 6).map((reserva) => (
                       <ReservaCard
                         key={reserva.id}
@@ -469,7 +469,7 @@ const MinhasReservas = () => {
               )}
 
               {reservas.length === 0 && filasEspera.length === 0 && (
-                <div className="premium-card bg-white/40 border-dashed border-primary/20 rounded-[3rem] py-32 text-center space-y-8">
+                <div className="premium-card bg-white/40 border-dashed border-primary/20 rounded-[2rem] sm:rounded-[3rem] py-20 sm:py-32 text-center space-y-8">
                   <div className="w-24 h-24 bg-primary/5 rounded-full flex items-center justify-center mx-auto shadow-inner relative group"></div>
                   <div className="space-y-2">
                     <h3 className="text-2xl font-black text-foreground tracking-tight italic">
