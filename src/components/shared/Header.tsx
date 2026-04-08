@@ -70,6 +70,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cadastroIncompleto, setCadastroIncompleto] = useState(false);
   const [loadingCadastroStatus, setLoadingCadastroStatus] = useState(true);
+  const [avatarLoadError, setAvatarLoadError] = useState(false);
 
   const shouldSkipProfile = location.pathname === '/cadastro';
   const { profile } = shouldSkipProfile ? { profile: null } : useProfile();
@@ -99,6 +100,10 @@ const Header = () => {
 
     checkCadastroStatus();
   }, [user, shouldSkipProfile]);
+
+  useEffect(() => {
+    setAvatarLoadError(false);
+  }, [profile?.avatar_url]);
 
   /* SE O HEADER NÃO DEVE APARECER */
   if (user && cadastroIncompleto && location.pathname === '/cadastro') return null;
@@ -186,8 +191,13 @@ const Header = () => {
                 <DropdownMenu modal={false}>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="flex items-center space-x-2 hover:bg-muted rounded-full px-2 h-10">
-                      {profile?.avatar_url ? (
-                        <img src={buildAvatarUrl(profile.avatar_url)} alt="Avatar" className="w-8 h-8 rounded-full border border-primary/10" />
+                      {profile?.avatar_url && !avatarLoadError ? (
+                        <img
+                          src={buildAvatarUrl(profile.avatar_url)}
+                          alt="Avatar"
+                          className="w-8 h-8 rounded-full border border-primary/10 object-cover"
+                          onError={() => setAvatarLoadError(true)}
+                        />
                       ) : (
                         <User className="w-5 h-5 text-primary/60" />
                       )}
@@ -246,8 +256,12 @@ const Header = () => {
           <div className="fixed right-4 top-20 bottom-24 w-72 glass-dark rounded-3xl shadow-xl overflow-hidden border border-primary/10 flex flex-col"
             onClick={e => e.stopPropagation()}>
             <div className="p-6 border-b border-primary/5 flex items-center gap-4 bg-primary/5">
-              {profile?.avatar_url ? (
-                <img src={buildAvatarUrl(profile.avatar_url)} className="w-12 h-12 rounded-full object-cover border-2 border-white" />
+              {profile?.avatar_url && !avatarLoadError ? (
+                <img
+                  src={buildAvatarUrl(profile.avatar_url)}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-white"
+                  onError={() => setAvatarLoadError(true)}
+                />
               ) : (
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                   <User className="w-6 h-6 text-primary" />

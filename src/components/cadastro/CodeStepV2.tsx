@@ -284,8 +284,12 @@ const CodeStepV2: React.FC<CodeStepV2Props> = ({ onComplete }) => {
       const { data: whatsappData, error: whatsappError } = await supabase.functions.invoke('send-whatsapp', {
         body: { 
           telefone: phoneNumber,
+          phoneNumber: `+${phoneNumber}`,
+          numero_whatsapp: phoneNumber,
           codigo: newCode,
-          nome: 'usuário'
+          verificationCode: newCode,
+          nome: user?.user_metadata?.full_name || user?.user_metadata?.name || 'usuário',
+          name: user?.user_metadata?.full_name || user?.user_metadata?.name || 'usuário'
         }
       });
 
@@ -293,7 +297,7 @@ const CodeStepV2: React.FC<CodeStepV2Props> = ({ onComplete }) => {
         console.error('❌ Erro no WhatsApp:', whatsappError);
         toast({
           title: "Erro ao enviar WhatsApp",
-          description: "Falha no envio do novo código.",
+          description: whatsappData?.error || whatsappError?.message || "Falha no envio do novo código.",
           variant: "destructive",
         });
         return;

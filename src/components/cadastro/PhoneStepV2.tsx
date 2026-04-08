@@ -223,8 +223,12 @@ const PhoneStepV2: React.FC<PhoneStepV2Props> = ({ onComplete }) => {
       const { data: whatsappData, error: whatsappError } = await supabase.functions.invoke('send-whatsapp', {
         body: { 
           telefone: cleanPhone,
+          phoneNumber: `+${cleanPhone}`,
+          numero_whatsapp: cleanPhone,
           codigo: verificationCode,
-          nome: 'usuário'
+          verificationCode,
+          nome: user?.user_metadata?.full_name || user?.user_metadata?.name || 'usuário',
+          name: user?.user_metadata?.full_name || user?.user_metadata?.name || 'usuário'
         }
       });
 
