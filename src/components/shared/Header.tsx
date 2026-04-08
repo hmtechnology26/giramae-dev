@@ -162,13 +162,13 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-1 left-3 right-3 md:left-6 md:right-6 z-40 rounded-full mx-auto max-w-7xl transition-all duration-500">
-        <div className="bg-white/70 backdrop-blur-3xl border border-white/90 rounded-full px-4 md:px-8 shadow-[0_32px_64px_-16px_rgba(235,51,148,0.12)]">
+      <header className="fixed top-1 left-2 right-2 md:left-6 md:right-6 z-40 rounded-full mx-auto max-w-7xl transition-all duration-500">
+        <div className="bg-white/70 backdrop-blur-3xl border border-white/90 rounded-full px-3 md:px-8 shadow-[0_32px_64px_-16px_rgba(235,51,148,0.12)]">
           <div className="w-full max-w-7xl mx-auto">
-            <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center h-16 md:h-20 gap-2 md:gap-3">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center h-14 md:h-20 gap-2 md:gap-3">
               {/* -------------- LOGO -------------- */}
               <Link to="/feed" className="flex items-center transition-all duration-500 active:scale-95 group shrink-0 pr-2">
-                <img src="/giramae_logo.png" alt="Logo" className="h-[34px] md:h-[54px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
+                <img src="/giramae_logo.png" alt="Logo" className="h-[30px] md:h-[54px] w-auto object-contain drop-shadow-sm group-hover:brightness-110 transition-all" />
               </Link>
 
               {/* -------------- MENU CENTRAL -------------- */}
@@ -230,19 +230,19 @@ const Header = () => {
               </div>
 
               {/* -------------- MOBILE BUTTON -------------- */}
-              <div className="md:hidden flex items-center gap-1.5">
+              <div className="md:hidden flex items-center gap-1">
                 {!shouldHideMenus && <SaldoHeader />}
-                {!shouldHideMenus && <div className="scale-90"><NotificationBell /></div>}
+                {!shouldHideMenus && <div className="scale-[0.85]"><NotificationBell /></div>}
                 {!shouldHideMenus ? (
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="rounded-full p-1.5 h-9 w-9"
+                    className="rounded-full p-1 h-[34px] w-[34px]"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <X className="h-4 w-4 text-primary" /> : <Menu className="h-4 w-4 text-primary" />}
                   </Button>
                 ) : (
-                  <Button variant="ghost" size="sm" className="rounded-full h-9 w-9" onClick={handleSignOut}>
+                  <Button variant="ghost" size="sm" className="rounded-full h-[34px] w-[34px]" onClick={handleSignOut}>
                     <X className="h-4 w-4 text-primary" />
                   </Button>
                 )}
