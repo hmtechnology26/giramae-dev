@@ -92,6 +92,7 @@ import NotFound from '@/pages/NotFound';
 // Providers
 import { RecompensasProvider } from '@/components/recompensas/ProviderRecompensas';
 import { GiraTourProvider, OnboardingChecklist } from '@/modules/onboarding';
+import WelcomeBonusModal from '@/components/shared/WelcomeBonusModal';
 
 // ============================================================================
 // QUERY CLIENT CONFIGURATION
@@ -136,6 +137,7 @@ function App() {
               <AnalyticsWrapper>
                 {/* Menu flutuante de jornadas */}
                 <OnboardingChecklist />
+                <WelcomeBonusModal />
               
               <Routes>
                 {/* ================================================ */}
